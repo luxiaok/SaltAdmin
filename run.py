@@ -43,8 +43,8 @@ else:
 #print web.config.session_parameters
 
 if __name__ == "__main__":
-    #使用webpy内置的web服务器
+    # 使用webpy内置的web服务器
     app.run()
-else:
-    #这里是适配Nginx+uWSGI
-    application = app.wsgifunc()
+    # Nginx + uWSGI运行模式, 两种运行方式只能选择一个
+    #application = app.wsgifunc()
+
