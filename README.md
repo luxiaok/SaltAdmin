@@ -32,7 +32,11 @@ Desgin By [Xiaok](http://github.com/luxiaok)
 * 依赖以下python模块：
 * python-dmidecode、psutil、salt
 
-## 四、截图欣赏 ##
+## 四、初始化信息 ##
+* 用户名：admin
+* 密  码：admin
+
+## 五、截图欣赏 ##
 
 ### 登录 ###
 ![Login](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/login.png)
