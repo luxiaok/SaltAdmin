@@ -4,7 +4,7 @@ SaltAdmin
 Desgin By [Xiaok](http://github.com/luxiaok)
 
 ## 一、环境说明 ##
-* 系统平台：rhel 6.5 x64
+* 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
 * [Python](http://www.python.org)：2.6.6/2.7.8
 * [Webpy](http://webpy.org)：0.37
 * [Mako](http://www.makotemplates.org/)：0.9.1/1.0.0
@@ -25,6 +25,28 @@ Desgin By [Xiaok](http://github.com/luxiaok)
 ### 2.Mako ###
 * easy_install -Z mako
 
+### 3.MySQLdb ###
+* yum install MySQL-python
+
+### 4.SaltStack ###
+RedHat 6 系列<br>
+* rpm -ivh http://mirrors.sohu.com/fedora-epel/6Server/x86_64/epel-release-6-8.noarch.rpm
+* yum install salt-master
+* yum install salt-minion
+
+Ubuntu 系列<br>
+* add-apt-repository -y ppa:saltstack/salt
+* apt-get update
+* apt-get install salt-master
+* apt-get install salt-ssh
+* apt-get install salt-minion
+
+### 5.数据库初始化  ###
+* 新建数据库saltadmin
+* 导入doc目录下的saltadmin.sql文件
+* 配置config/database.py
+
+
 ## 三、其他依赖 ##
 依赖以下python模块：
 * python-dmidecode
@@ -32,6 +54,8 @@ Desgin By [Xiaok](http://github.com/luxiaok)
 * salt
 
 ## 四、初始化信息 ##
+* 启动：python run.py
+* 端口：8080
 * 用户名：admin
 * 密  码：admin
 
