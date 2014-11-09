@@ -1,6 +1,6 @@
 SaltAdmin
 =========
-基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)的开源运维平台<br>
+基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)框架的开源运维平台<br>
 Desgin By [Xiaok](http://github.com/luxiaok)
 
 ## 一、环境说明 ##
@@ -17,7 +17,7 @@ Desgin By [Xiaok](http://github.com/luxiaok)
 
 ## 二、安装 ##
 
-### 1.webpy ###
+### 1.Webpy ###
 * wget http://webpy.org/static/web.py-0.37.tar.gz
 * tar zxf web.py-0.37.tar.gz
 * python setup.py install
