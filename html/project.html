@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 项目管理</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<script lang="javascript">
+function isDel()
+{
+    return confirm('确定删除该项目？');
+}
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='project',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>项目管理</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+		  <table width=100%>
+		  <tr>
+			  <td><h3>基本信息列表</h3></td>
+              <td align='right'><a href="/project/add" class="btn"><span class="icon icon-add">&nbsp;</span>添加项目</a></td>
+          </tr>
+          </table>					
+					<table class="datalist" >
+						<thead>
+						    <tr>
+							<th>ID</th>
+							<th>名称</th>
+							<th>标识</th>
+							<th>域名</th>
+							<th>开发语言</th>
+							<th>接口人</th>
+							<th>项目类型</th>
+							<th>项目目录</th>
+							<th>上线日期</th>
+							<th>修改者</th>
+							<th>关联项目</th>
+							<th>状态</th>
+							<th>管理操作</th>
+					        </tr>
+						</thead>
+						<tbody>
+							% for i in pd:
+							<tr class="dataline">
+							  <td>${i.id}</td>
+							  <td>${i.name}</td>
+							  <td>${i.cname}</td>
+							  <td class="point" title="访问端口：${i.port}&#10;公共服务：${i.public}">${i.domain}</td>
+							  <td>${i.lang}</td>
+							  <td>${i.man} / ${i.developer}</td>
+							  <td>${i.type}</td>
+							  <td>${i.directory}</td>
+                <td class="point" title="创建者：${i.creator}">${i.cdate}</td>
+                <td class="point" title="修改时间：${i.mdate}">${i.editor}</td>
+                <td>${i.relation}</td>
+                <td>${i.status}</td>
+							  <td><a href="/project/config?pid=${i.id}">详情</a> | <a href="/project/del?pid=${i.id}" onClick="return isDel()">删除</a> | <a href="/project/config?pid=${i.id}">配置</a></td>
+							</tr>
+							% endfor
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>ID</th>
+							    <th>名称</th>
+							    <th>标识</th>
+							    <th>域名</th>
+							    <th>开发语言</th>
+					     		<th>接口人</th>
+							    <th>项目类型</th>
+							    <th>项目目录</th>
+							    <th>上线日期</th>
+							    <th>修改者</th>
+							    <th>关联项目</th>
+							    <th>状态</th>
+							    <th>管理操作</th>
+							</tr>
+						</tfoot>
+					</table>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

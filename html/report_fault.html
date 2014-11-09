@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 报告 - 故障上报</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='report',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>故障上报</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+		  <table width=100%>
+		  <tr>
+			  <td><h3>故障列表</h3></td>
+			  <td align='left'>按上报时间显示：<select name="show4role" id="show4role" class="" onchange="">
+                      <option value=""  selected="selected">所有时间</option>
+                      <option value="">近3天</option>
+                      <option value="">近1周</option>
+                      <option value="">近半个月</option>
+                      <option value="">近1个月</option>
+                      <option value="">近3个月</option>
+                      <option value="">半年内</option>
+                      <option value="">很久以前</option>
+                 </select>
+                  　　按故障等级显示：<select name="show4idc" id="show4idc" class="" onchange="">
+                      <option value=""  selected="selected">所有等级</option>
+                      <option value="">Ⅳ级（一般 - 蓝色）</option>
+                      <option value="">Ⅲ级（较重 - 黄色）</option>
+                      <option value="">Ⅱ级（严重 - 橙色）</option>
+                      <option value="">Ⅰ级（高危 - 红色）</option>
+                 </select>                
+                  　　按处理结果显示：<select name="show4idc" id="show4idc" class="" onchange="">
+                      <option value=""  selected="selected">所有结果</option>
+                      <option value="">上报中</option>
+                      <option value="">未处理</option>
+                      <option value="">处理中</option>
+                      <option value="">已处理</option>
+                 </select>                
+                  　　显示行数：<select name="showline" id="showline" class="">
+                      <option value="all"  selected="selected">所有行</option>
+                      <option value="line10">10 行</option>
+                      <option value="line20">20 行</option>
+                      <option value="line50">50 行</option>
+                      <option value="line100">100行</option>
+                      <option value="line200">200行</option>
+                      <option value="line500">500行</option>
+                  </select>			
+			  </td>
+              <td align='right'><a href="javascript:void(0)" class="btn"><span class="icon icon-add">&nbsp;</span>上报故障</a></td>
+          </tr>
+          </table>					
+					<table class="datalist" id="datalist">
+						<thead>
+						    <tr>
+							<th>ID</th>
+							<th>故障时间</th>
+							<th>处理时间</th>
+							<th>故障描述</th>
+							<th>关联主机</th>
+							<th>关联项目</th>
+							<th>上报人</th>
+							<th>故障等级</th>
+							<th>处理结果</th>
+					        </tr>
+						</thead>
+						<tbody>
+						         <tr class="dataline">
+						               <td>1</td>
+						               <td>2014-07-03 20:51:19</td>
+						               <td>无</td>
+						               <td>网游API:sns/ucLogin报超时</td>
+						               <td>10.50.2.60/61</td>
+						               <td>网游平台</td>
+						               <td>陆小K</td>
+						               <td><font color="yellow"><b>III</b></font></td>
+						               <td><font color="red">未处理</font></td>
+						         </tr>
+						         <tr class="dataline">
+						               <td>2</td>
+						               <td>2014-07-02 17:00:28</td>
+						               <td>2014-07-03 13:08:43</td>
+						               <td>服务器意外宕机</td>
+						               <td>172.16.180.29</td>
+						               <td>休闲SDK</td>
+						               <td>陆小K</td>
+						               <td><font color="red"><b>I</b></font></td>
+						               <td><font color="green">已处理</font></td>
+						         </tr>
+						          <tr class="dataline">
+						               <td>3</td>
+						               <td>2014-07-01 10:59:02</td>
+						               <td>无</td>
+						               <td>Nginx缺少chunkin模块</td>
+						               <td>172.16.101.10</td>
+						               <td>基础平台</td>
+						               <td>陆小K</td>
+						               <td><font color="blue"><b>IV</b></font></td>
+						               <td><font color="red">未处理</font></td>
+						         </tr>
+						         
+						</tbody>
+						<tfoot>
+					 	<tr>
+							<th>ID</th>
+							<th>故障时间</th>
+							<th>处理时间</th>
+							<th>故障描述</th>
+							<th>关联主机</th>
+							<th>关联项目</th>
+							<th>上报人</th>
+							<th>故障等级</th>
+							<th>处理结果</th>
+						</tr>
+						</tfoot>
+					</table>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

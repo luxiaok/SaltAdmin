@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 用户管理 - 添加用户</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户添加table样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- 添加用户 -->
+<script type="text/javascript" src="/static/js/users.add.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+</head>
+<body onload="document.getElementById('username').focus();">
+	<!-- Header -->
+	<%include file="header.html" args="curM='users',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>添加用户</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+		<div>
+		<form name="userForm" id="userForm" action="/users/add">
+        <table class="maintable">
+	        <tr>
+		        <td class="textLeft">用户名</td>
+		        <td class="inputRight"><input type="text" name="username" id="username" class="maininput" /></td>
+		        <td class="textLeft">姓名</td>
+		        <td class="inputRight"><input type="text" name="nickname" id="nickname" class="maininput" /></td>
+		    </tr>
+	        <tr>
+		        <td class="textLeft">密码</td>
+		        <td class="inputRight"><input type="password" name="password" id="password" class="maininput" /></td>
+		        <td class="textLeft">确认密码</td>
+		        <td class="inputRight"><input type="password" name="password2" id="password2" class="maininput" /></td>
+		    </tr>
+		    <tr>
+		        <td class="textLeft">手机号</td>
+		        <td class="inputRight"><input type="text" name="mobile" id="mobile" class="maininput" /></td>
+		        <td class="textLeft">E-Mail</td>
+		        <td class="inputRight"><input type="text" name="email" id="email" class="maininput" /></td>
+		    </tr>
+		    <tr>
+		        <td class="textLeft">备注信息</td>
+		        <td class="inputRight"><input type="text" name="comment" id="comment" class="maininput" /></td>
+		        <td class="textLeft">级别</td>
+		        <td class="inputRight"><select id="level" name="level" class="selectmenu">
+		          <option value="0">管理者</option>
+		          <option value="1" selected="selected">普通用户</option>
+	          </select></td>
+		    </tr>
+	        <tr>
+		        <td class="textLeft">状态</td>
+		        <td class="inputRight"><select id="status" name="status" class="selectmenu">
+		          <option value="yes" selected="selected">启用</option>
+		          <option value="no">禁用</option>
+	          </select></td>
+		        <td class="textLeft">注册日期</td>
+		        <%!
+                    import time
+                    NowDate = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
+                %>
+		        <td class="inputRight"><input class="readonly" type="text" name="regdate" id="regdate" class="maininput" value="${NowDate}" readonly="true"/></td>
+		    </tr>
+		</table>
+		<div class="submitArea">
+		    <div class="reset"><a href="javascript:void(0)" onClick="resetForm()" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		    <div class="submit"><a href="javascript:void(0)" onClick="submitForm('userForm')" class="btn"><span class="icon icon-add">&nbsp;</span>保 存</a></div>
+		</div>    
+        </form>
+        </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

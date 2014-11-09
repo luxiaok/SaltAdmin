@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - Redis实例管理</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 删除主机确认函数 -->
+<script type="text/javascript" src="/static/js/redis.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='hosts',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>新建Redis实例</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+		  <table width=100%>
+		  <tr>
+			  <td><h3>Redis Instance Add</h3></td>
+              <td align='right'><a href="/hosts/redis" class="btn"><span class="icon icon-ok">&nbsp;</span>管理实例</a></td>
+          </tr>
+          </table>					
+					<div>
+					<form name="redisForm" id="redisForm" action="/hosts/redis/add">
+<table class="maintable">
+  <tr>
+    <td class="textLeft">实例ID</td>
+    <td class="inputRight">系统自动分配</td><input type="text" name="id" id="id" class="DisplayNone" value="none"/>
+    <td class="textLeft">业务归属</td>
+    <td class="inputRight"><select name="project" id="project" class="selectmenu">
+	  <option value="0" selected="selected">-- 选择项目归属 --</option>
+      <option value="HY">互娱游戏</option>
+      <option value="HY1">互娱游戏1</option>
+      <option value="HY2">互娱游戏2</option>
+      <option value="HY3">互娱游戏3</option>
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td class="textLeft">Redis主机</td>
+    <td class="inputRight"><select name="hid" id="hid" class="selectmenu">
+      <option value="0" selected="selected">-- 选择Redis主机 --</option>
+      % for rs in RedisHost:
+      <option value="${rs.id}">${rs.priip1}</option>
+      % endfor
+    </select></td>
+    <td class="textLeft">实例端口</td>
+    <td class="inputRight"><input type="text" name="port" id="port" class="maininput" /></td>
+  </tr>
+  <tr>
+    <td class="textLeft">配置文件</td>
+    <td class="inputRight"><input type="text" name="conf" class="maininput" value="/etc/redis/"/></td>
+    <td class="textLeft">实例容量</td>
+    <td class="inputRight"><input type="text" name="size" value="8" size="10" style="text-align:right"/>
+    <select name="sizeunit" id="sizeunit" style="width:52px">
+      <option value="G" selected="selected">G</option>
+      <option value="M">M</option>
+      <option value="K">K</option>
+      <option value="B">B</option>
+    </select>
+    </td>
+  </tr>
+  <tr>
+    <td class="textLeft">主服务器</td>
+    <td class="inputRight"><select name="master" id="master" class="selectmenu">
+      <option value="0" selected="selected">无</option>
+      % for i in RedisIns:
+      <option value="${i['id']}">${i['ip']}:${i['port']}</option>
+      % endfor
+    </select></td>
+    <td class="textLeft">从服务器</td>
+    <td class="inputRight"><select name="slave" id="slave" class="selectmenu">
+      <option value="0" selected="selected">无</option>
+      % for i in RedisIns:
+      <option value="${i['id']}">${i['ip']}:${i['port']}</option>
+      % endfor
+    </select>
+    </td>
+  </tr>
+    <%!
+    import time
+    NowDate = time.strftime("%Y-%m-%d %H:%M:%S",time.localtime())
+    %>
+  <tr>
+	<td class="textLeft">创建者</td>
+	<td class="inputRight">${ShowName}</td>
+    <td class="textLeft">创建日期</td>
+    <td class="inputRight"><input type="text" name="cdate" class="maininput" value="${NowDate}"/></td>
+  </tr>
+  <tr>
+	<td class="textLeft">修改者</td>
+	<td class="inputRight">${ShowName}</td>
+    <td class="textLeft">修改日期</td>
+    <td class="inputRight"><input type="text" name="mdate" class="maininput" value="${NowDate}"/></td>
+  </tr>
+  <tr>
+    <td class="textLeft">状态</td>
+    
+    <td class="inputRight"><select name="status" id="status" class="selectmenu">
+      <option value="yes" selected="selected">启用</option>
+      <option value="no">停用</option>
+    </select></td>
+    <td class="textLeft">备注信息</td>
+    <td class="inputRight"><input type="text" name="comment" class="maininput" /></td>
+  </tr>
+</table>
+	<div class="submitArea">
+		<div class="reset"><a href="javascript:void(0)" onClick="resetForm('hid')" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		<div class="submit"><a href="javascript:void(0)" onClick="submitForm('redisForm')" class="btn"><span class="icon icon-add">&nbsp;</span>保 存</a></div>
+	</div>
+</form>
+					
+					</div>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />
+</body>
+</html>

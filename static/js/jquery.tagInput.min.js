@@ -1,0 +1,35 @@
+/*
+  Copyright (c) 2009 Open Lab, http://www.open-lab.com/
+  Written by Roberto Bicchierai http://roberto.open-lab.com.
+  Permission is hereby granted, free of charge, to any person obtaining
+  a copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so, subject to
+  the following conditions:
+
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+if(typeof String.prototype.trim=="undefined")String.prototype.trim=function(){return this.replace(/^\s*(\S*(\s+\S+)*)\s*$/,"$1")};
+jQuery.fn.tagInput=function(a){if(!a.tags&&!a.jsonUrl)a.tags=[{tag:"tag1",freq:1},{tag:"tag2",freq:2},{tag:"tag3",freq:3},{tag:"tag4",freq:4}];if(typeof a.tagSeparator=="undefined")a.tagSeparator=",";if(typeof a.autoFilter=="undefined")a.autoFilter=true;if(typeof a.autoStart=="undefined")a.autoStart=false;if(typeof a.boldify=="undefined")a.boldify=true;if(typeof a.sortBy=="undefined")a.sortBy="tag";this.each(function(){var c=$(this),b;c.addClass("tagInput");c.tagOptions=a;var g=a.suggestedTagsPlaceHolder;
+if(a.suggestedTags){if(!g){var h=$("<div class='tagInputSuggestedTags'><span class='label'>suggested tags: </span><span class='tagInputSuggestedTagList'></span></div>");g=h.find(".tagInputSuggestedTagList");c.after(h)}for(var k in a.suggestedTags)g.append($("<span class='tag'>"+a.suggestedTags[k]+"</span>"));g.find(".tag").click(function(){var f=$(this),d=c.val(),e=f.text(),j=new RegExp(e+"\\b","g");if(s(d,e)){d=d.replace(j,"");f.removeClass("tagUsed")}else{d=d+a.tagSeparator+e;f.addClass("tagUsed")}c.val(t(d))})}var l=
+function(f,d){if(f.size()>0){var e=b.get(0),j=f.get(0);if(d)b.scrollTop()>j.offsetTop&&b.scrollTop(j.offsetTop);else if(j.offsetTop+j.offsetHeight>e.scrollTop+e.offsetHeight)e.scrollTop=j.offsetTop+j.offsetHeight-e.offsetHeight;b.find("div.tagInputSel").removeClass("tagInputSel");f.addClass("tagInputSel")}},m=function(f){var d=c.val().lastIndexOf(a.tagSeparator),e=d<=0?"":a.tagSeparator+(a.tagSeparator==" "?"":" ");f=(c.val().substr(0,d)+e+f.find(".tagInputLineTag").text()).trim();c.val(f);b.hide();
+$().oneTime(200,function(){c.focus()})},v=function(){var f=c.val().lastIndexOf(a.tagSeparator),d=c.val().substr(f+1).trim();f=function(e){if(a.sortBy=="frequency")e=e.sort(function(n,o){if(n.freq<o.freq)return 1;if(n.freq>o.freq)return-1;return 0});else if(a.sortBy=="tag")e=e.sort(function(n,o){if(n.tag<o.tag)return-1;if(n.tag>o.tag)return 1;return 0});for(var j in e){var p=e[j],u=p.tag.toLocaleLowerCase().indexOf(d.toLocaleLowerCase())==0;if(!a.autoFilter||u){var r=$("<div class='tagInputLine'></div>"),
+q=p.tag;if(a.boldify&&u)q="<b>"+q.substring(0,d.length)+"</b>"+q.substring(d.length);r.append("<div class='tagInputLineTag'>"+q+"</div>");p.freq&&r.append("<div class='tagInputLineFreq'>"+p.freq+"</div>");b.append(r)}}b.html()!=""&&b.fadeIn();b.find("div:first").addClass("tagInputSel");b.find("div.tagInputLine").bind("click",function(){m($(this))})};if(d!=""||a.autoStart){b.html("");a.tags?f(a.tags):$.getJSON(a.jsonUrl,{search:d},f)}else b.fadeOut(200)},t=function(f){f=f.split(a.tagSeparator);for(var d=
+"",e=true,j=0;j<f.length;j++)if(f[j].trim()!="")if(e){e=false;d+=f[j].trim()}else d=d+a.tagSeparator+(a.tagSeparator==" "?"":" ")+f[j].trim();return d},s=function(f,d){f=f.split(a.tagSeparator);var e=false;d=d.trim();for(i=0;i<f.length;i++)if(f[i].trim()==d){e=true;break}return e};h=function(){$(this);$().stopTime("suggTagRefresh");$().oneTime(400,"suggTagRefresh",function(){w()})};var w=function(){var f=c.val();g.find(".tag").each(function(){var d=$(this),e=d.text();s(f,e)?d.addClass("tagUsed"):
+d.removeClass("tagUsed")})};$(this).bind("focus",function(){b=$("#__tagInputDiv");if(b.size()<=0){b=$("<div id='__tagInputDiv' class='tagInputDiv' style='width:"+c.get(0).clientWidth+";display:none; '></div>");c.after(b);b.css({left:c.position().left})}a.autoStart&&v(c,b)}).bind("blur",function(){b=$("#__tagInputDiv");c.val(t(c.val()));b.fadeOut(200,function(){b.remove()})}).bind("keydown",function(f){var d=b.find("div.tagInputLine"),e=d.index(b.find("div.tagInputSel")),j=true;switch(f.which){case 38:e=
+e<1?0:e-1;l(d.eq(e),true);break;case 40:e=e<d.size()-1?e+1:d.size()-1;l(d.eq(e),false);break;case 9:case 13:if(b.is(":visible")){f=d.eq(e);m(f);j=false}break;case 27:b.fadeOut(200);break;default:$(document).stopTime("tagInputRefresh");$(document).oneTime(400,"tagInputRefresh",function(){v()});break}return j});a.suggestedTags&&$(this).bind("keyup",h)});return this};
+jQuery.fn.extend({everyTime:function(a,c,b,g,h){return this.each(function(){jQuery.timer.add(this,a,c,b,g,h)})},oneTime:function(a,c,b){return this.each(function(){jQuery.timer.add(this,a,c,b,1)})},stopTime:function(a,c){return this.each(function(){jQuery.timer.remove(this,a,c)})}});
+jQuery.extend({timer:{guid:1,global:{},regex:/^([0-9]+)\s*(.*s)?$/,powers:{ms:1,cs:10,ds:100,s:1E3,das:1E4,hs:1E5,ks:1E6},timeParse:function(a){if(a==undefined||a==null)return null;var c=this.regex.exec(jQuery.trim(a.toString()));return c[2]?parseInt(c[1],10)*(this.powers[c[2]]||1):a},add:function(a,c,b,g,h,k){var l=0;if(jQuery.isFunction(b)){h||(h=g);g=b;b=c}c=jQuery.timer.timeParse(c);if(!(typeof c!="number"||isNaN(c)||c<=0)){if(h&&h.constructor!=Number){k=!!h;h=0}h=h||0;k=k||false;if(!a.$timers)a.$timers=
+{};a.$timers[b]||(a.$timers[b]={});g.$timerID=g.$timerID||this.guid++;var m=function(){if(!(k&&this.inProgress)){this.inProgress=true;if(++l>h&&h!==0||g.call(a,l)===false)jQuery.timer.remove(a,b,g);this.inProgress=false}};m.$timerID=g.$timerID;a.$timers[b][g.$timerID]||(a.$timers[b][g.$timerID]=window.setInterval(m,c));this.global[b]||(this.global[b]=[]);this.global[b].push(a)}},remove:function(a,c,b){var g=a.$timers,h;if(g){if(c){if(g[c]){if(b){if(b.$timerID){window.clearInterval(g[c][b.$timerID]);
+delete g[c][b.$timerID]}}else for(b in g[c]){window.clearInterval(g[c][b]);delete g[c][b]}for(h in g[c])break;if(!h){h=null;delete g[c]}}}else for(c in g)this.remove(a,c,b);for(h in g)break;if(!h)a.$timers=null}}}});jQuery.browser.msie&&jQuery(window).one("unload",function(){var a=jQuery.timer.global;for(var c in a)for(var b=a[c],g=b.length;--g;)jQuery.timer.remove(b[g],c)});

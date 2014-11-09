@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 项目配置 - ${pd.name}</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 删除项目函数确认 -->
+<script type="text/javascript" src="/static/js/project.add.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 动态添加配置 -->
+<script type="text/javascript" src="/static/js/project.config.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='project',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>项目配置管理</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+		<div>
+		  <table width="100%">
+		  <tr>
+			  <td><h3>项目基本信息：${pd.name}</h3></td>
+        <td align='right'><a href="/project/edit" class="btn"><span class="icon icon-ok">&nbsp;</span>修改基本信息</a></td>
+      </tr>
+      </table>
+			</div>
+<div>
+##<form name="projectForm" id="projectForm" action="/project/config">
+<table class="maintable">
+  <tr>
+    % if pd.port == 80:
+    <% domain = pd.domain %>
+    % else:
+    <% domain = pd.domain + ":" + str(pd.port) %>
+    % endif
+    % if pd.public == 'yes':
+    <% pub = '公共服务' %>
+    % else:
+    <% pub = '内部服务' %>
+    % endif
+    <td class="textLeft" width="25%">域名</td>
+    <td class="inputRight" width="25%"><a href="http://${domain}" target="_blank">${domain}</a></td>
+    <td class="textLeft" width="25%">服务属性</td>
+    <td class="inputRight" width="25%">${pub}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">标识 / 别名</td>
+    <td class="inputRight">${pd.cname}</td>
+    <td class="textLeft">主目录</td>
+    <td class="inputRight">${pd.directory}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">开发语言/框架</td>
+    <td class="inputRight">${pd.lang}</td>
+    <td class="textLeft">信息录入</td>
+    <td class="inputRight">${pd.creator}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">接口人</td>
+    <td class="inputRight">${pd.man} / ${pd.developer}</td>
+    <td class="textLeft">上线日期</td>
+    <td class="inputRight">${pd.cdate}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">类型</td>
+    <td class="inputRight">${pd.type}</td>
+    <td class="textLeft">信息更新</td>
+    <td class="inputRight">${pd.editor}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">状态</td>
+    <td class="inputRight">${pd.status}</td>
+    <td class="textLeft">信息更新日期</td>
+    <td class="inputRight">${pd.mdate}</td>
+  </tr>
+  <tr>
+    <td class="textLeft">关联项目</td>
+    <td class="inputRight">${pd.relation}</td>
+    <td class="textLeft">备注信息</td>
+    <td class="inputRight">${pd.comment}</td>
+  </tr>
+</table>
+<% s = '' %>
+% for i in sm:
+<% s += "<option value=%s >%s</option>" % (i[0],i[1]) %>
+% endfor
+<div class="LineLeft"><h3>Web配置信息</h3></div>
+<div class="LineRight">
+<a href="javascript:void(0)" class="btn" onclick='addRow("WebConfig","${s}")'><span class="icon icon-add">&nbsp;</span>添加Web配置</a>
+</div>
+<div><form name="testForm" method="POST" action="/project/config">
+<table class="maintable" id="WebConfig">
+  <tr>
+    <td class="textLeft" width="25%">发布机</td>
+    <td class="inputRight" width="25%"><select name="release_host" id="" class="selectmenu">
+	  <option value="0" selected="selected">-- 选择发布机 --</option>
+    </select></td>
+    <td class="textLeft" width="25%">发布目录</td>
+    <td class="inputRight" width="25%"><input type="text" name="directory" class="maininput" value="${pd.directory}"/></td>
+  </tr>
+  <tr>
+    <td class="textLeft">前置机</td>
+    <td class="inputRight"><select name="front" id="" class="selectmenu">
+	  <option value="0" selected="selected">-- 选择前置机 --</option>
+    </select>：<input type="text" name="front_port" value="${pd.port}" size="2"/></td>
+    <td class="textLeft">前置机配置文件</td>
+    <td class="inputRight"><input type="text" name="front_config" class="maininput" value="/etc/nginx/" /></td>
+  </tr>
+  <tr>
+    <td class="textLeft">后端Web机端口</td>
+    <td class="inputRight"><input type="text" name="backend_port" value="${pd.port}" class="maininput"/></td>
+    <td class="textLeft">配置文件</td>
+    <td class="inputRight"><input type="text" name="backend_config" value="/etc/nginx/" class="maininput"/></td>
+  </tr>
+  <tr>
+    <td class="textLeft">后端Web机1</td>
+    <td class="inputRight"><select name="bw" id="bw_1" class="selectmenu">
+	  <option value="0" selected="selected">-- 选择后端机 --</option>
+	  % for i in sm:
+	  <option value="${i[0]}" >${i[1]}</option>
+	  % endfor
+    </select></td>
+    <td class="textLeft">Web1配置文件</td>
+    <td class="inputRight"><input type="text" name="bwconf" class="maininput" value="默认为空即可"/> <a href="javascript:void(0)" onclick='removeRow(this)'>删除</a></td>
+  </tr>
+  <tr>
+    <td class="textLeft">后端Web机2</td>
+    <td class="inputRight"><select name="bw" id="" class="selectmenu">
+	  <option value="0" selected="selected">-- 选择后端机 --</option>
+	  % for i in sm:
+	  <option value="${i[0]}" >${i[1]}</option>
+	  % endfor
+    </select></td>
+    <td class="textLeft">Web2配置文件</td>
+    <td class="inputRight"><input type="text" name="bwconf" class="maininput" value="默认为空即可" /> <a href="javascript:void(0)" onclick='removeRow(this)'>删除</a></td>
+  </tr>
+</table>
+##<div class="submitArea">
+##	<div class="reset"><a href="javascript:void(0)" onClick="resetForm()" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+##	<div class="submit"><a href="javascript:void(0)" onClick="testForm.submit()" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+##</div>
+</form></div>
+<div class="LineLeft"><h3>数据库配置信息</h3></div>
+<div class="LineRight"><a href="javascript:void(0)" class="btn" ><span class="icon icon-add">&nbsp;</span>添加DB配置</a></div>
+<table class="datalist">
+<thead>
+<tr>
+<th>序号</th>
+<th>主机名</th>
+<th>端口</th>
+<th>数据库</th>
+<th>用户名</th>
+<th>密码</th>
+<th>主从属性</th>
+<th>权限</th>
+<th>备注</th>
+<th>操作</th>
+</tr>
+</thead>
+  <tr class="dataline">
+    <td class="shortTd">DB配置1</td>
+    <td><select class="HostWidth"><option value='0'>-- 选择主机 --</option><option value='1'>127.0.0.1</option><option value='2'>172.16.201.50</option><option value='3'>172.16.201.51</option></select></td>
+    <td><input type="text" name="" class="shortInput" value="3306"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_name"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_user"/></td>
+    <td><input type="text" name="" class="shortInput2" value="***"/></td>
+    <td><select><option value='alone'>独立</option><option value='master'>主</option><option value='slave'>从</option></select></td>
+    <td><select><option value='ro'>只读</option><option value='rw' selected>读写</option></select></td>
+    <td><input type="text" name="" value="主库"/></td>
+    <td>删除 | 保存</td>
+  </tr>
+  <tr class="dataline">
+    <td class="shortTd">DB配置2</td>
+    <td><select class="HostWidth"><option value='0'>-- 选择主机 --</option><option value='1'>192.168.187.129</option><option value='2'>172.16.201.50</option><option value='3'>172.16.201.51</option></select></td>
+    <td><input type="text" name="" class="shortInput" value="3306"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_name"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_user"/></td>
+    <td><input type="text" name="" class="shortInput2" value="***"/></td>
+    <td><select><option value='alone'>独立</option><option value='master'>主</option><option value='slave'>从</option></select></td>
+    <td><select><option value='ro' selected>只读</option><option value='rw'>读写</option></select></td>
+    <td><input type="text" name="" value="用户中心库"/></td>
+    <td>删除 | 保存</td>
+  </tr>
+  <tr class="dataline">
+    <td class="shortTd">DB配置3</td>
+    <td><select class="HostWidth"><option value='0'>-- 选择主机 --</option><option value='1'>192.168.187.129</option><option value='2'>172.16.201.50</option><option value='3'>172.16.201.51</option></select></td>
+    <td><input type="text" name="" class="shortInput" value="3306"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_name"/></td>
+    <td><input type="text" name="" class="shortInput2" value="db_user"/></td>
+    <td><input type="text" name="" class="shortInput2" value="***"/></td>
+    <td><select><option value='alone'>独立</option><option value='master'>主</option><option value='slave'>从</option></select></td>
+    <td><select><option value='ro' selected>只读</option><option value='rw'>读写</option></select></td>
+    <td><input type="text" name="" value="用户中心库"/></td>
+    <td>删除 | 保存</td>
+  </tr>
+</table>
+<div class="LineLeft"><h3>Redis配置信息</h3></div>
+<div class="LineRight"><a href="javascript:void(0)" class="btn" ><span class="icon icon-add">&nbsp;</span>添加Redis配置</a></div>
+<table class="maintable">
+  <tr>
+    <td class="textLeft" width="25%">Redis实例1</td>
+    <td class="inputRight" width="25%">192.168.18.128:6379</td>
+    <td class="textLeft" width="25%">功能说明</td>
+    <td class="inputRight" width="25%">数据缓存</td>
+  </tr>
+  <tr>
+    <td class="textLeft">Redis实例2</td>
+    <td class="inputRight">192.168.18.128:6400</td>
+    <td class="textLeft">功能说明</td>
+    <td class="inputRight">数据缓存</td>
+  </tr>
+  <tr>
+    <td class="textLeft">Redis实例3</td>
+    <td class="inputRight">192.168.18.128:6401</td>
+    <td class="textLeft">功能说明</td>
+    <td class="inputRight">数据缓存</td>
+  </tr>
+  <tr>
+    <td class="textLeft">Redis实例4</td>
+    <td class="inputRight">192.168.18.128:6507</td>
+    <td class="textLeft">功能说明</td>
+    <td class="inputRight">数据缓存</td>
+  </tr>
+  <tr>
+    <td class="textLeft">Redis实例5</td>
+    <td class="inputRight">192.168.18.128:6508</td>
+    <td class="textLeft">功能说明</td>
+    <td class="inputRight">数据缓存</td>
+  </tr>
+</table>
+<h3>其他配置信息</h3>
+<table class="maintable">
+  <tr>
+    <td class="textLeft" width="25%">配置1</td>
+    <td class="inputRight" width="25%">配置值</td>
+    <td class="textLeft" width="25%">配置2</td>
+    <td class="inputRight" width="25%">配置值</td>
+  </tr>
+  <tr>
+    <td class="textLeft" width="25%">配置1</td>
+    <td class="inputRight" width="25%">配置值</td>
+    <td class="textLeft" width="25%">配置2</td>
+    <td class="inputRight" width="25%">配置值</td>
+  </tr>
+  <tr>
+    <td class="textLeft" width="25%">配置1</td>
+    <td class="inputRight" width="25%">配置值</td>
+    <td class="textLeft" width="25%">配置2</td>
+    <td class="inputRight" width="25%">配置值</td>
+  </tr>
+</table>
+	<div class="submitArea">
+		<div class="reset"><a href="javascript:void(0)" onClick="resetForm()" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		<div class="submit"><a href="javascript:void(0)" onClick="submitForm('projectForm')" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+	</div>
+##</form>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

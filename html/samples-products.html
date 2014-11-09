@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>Admin Template</title>
+<meta name="description" content="Administry - Admin Template by www.865171.cn" />
+<meta name="keywords" content="Admin,Template" />
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+<!-- Colour Schemes
+Default colour scheme is blue. Uncomment prefered stylesheet to use it.
+<link rel="stylesheet" href="css/brown.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/gray.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/green.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/pink.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/red.css" type="text/css" media="screen" />
+-->
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="css/custom.css" type="text/css" />
+<!--swfobject - needed only if you require <video> tag support for older browsers -->
+<script type="text/javascript" src="/static/js/swfobject.js"></script>
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- Could be loaded remotely from Google CDN : <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" src="/static/js/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.widget.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.tabs.min.js"></script>
+<!-- jQuery tooltips -->
+<script type="text/javascript" src="/static/js/jquery.tipTip.min.js"></script>
+<!-- Superfish navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- jQuery popup box -->
+<script type="text/javascript" src="/static/js/jquery.nyroModal.pack.js"></script>
+<!-- jQuery form validation -->
+<script type="text/javascript" src="/static/js/jquery.validate_pack.js"></script>
+<!-- jQuery tag input -->
+<script type="text/javascript" src="/static/js/jquery.tagInput.min.js"></script>
+<!-- jQuery wysiwyg editor -->
+<script type="text/javascript" src="/static/js/jquery.wysiwyg.min.js"></script>
+<!-- Internet Explorer Fixes --> 
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" media="all" href="css/ie.css"/>
+<script src="/static/js/html5.js"></script>
+<![endif]-->
+<!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+<!--[if lt IE 8]>
+<script src="/static/js/IE8.js"></script>
+<![endif]-->
+<script type="text/javascript">
+
+/* sample tags */
+var tags=[
+	{tag:"js",freq:30},{tag:"jquery",freq:25}, {tag:"pojo",freq:10},{tag:"agile",freq:4},
+	{tag:"blog",freq:3},{tag:"canvas",freq:8}, {tag:"dialog",freq:3},{tag:"excel",freq:4},
+	{tag:"engine",freq:5},{tag:"flex",freq:18}, {tag:"firefox",freq:23},{tag:"javascript",freq:40},
+	{tag:"graph",freq:15},{tag:"grid",freq:20}, {tag:"hibernate",freq:13},{tag:"ical",freq:4},
+	{tag:"ldap",freq:9},{tag:"load",freq:20}, {tag:"security",freq:13},{tag:"XSS",freq:21},
+	{tag:"CSRF",freq:19},{tag:"html",freq:22}, {tag:"xml",freq:13},{tag:"tools",freq:21}
+];
+
+$(document).ready(function(){
+	
+	/* setup navigation, content boxes, etc... */
+	Administry.setup();
+	
+	$('#productdesc').wysiwyg({
+    controls: {
+      strikeThrough : { visible : true },
+      underline     : { visible : true },
+      
+      justifyLeft   : { visible : true },
+      justifyCenter : { visible : true },
+      justifyRight  : { visible : true },
+      justifyFull   : { visible : true },
+      
+      indent  : { visible : true },
+      outdent : { visible : true },
+      
+      subscript   : { visible : true },
+      superscript : { visible : true },
+      
+      undo : { visible : true },
+      redo : { visible : true },
+      
+      insertOrderedList    : { visible : true },
+      insertUnorderedList  : { visible : true },
+      insertHorizontalRule : { visible : true },
+
+      h4: {
+              visible: true,
+              className: 'h4',
+              command: $.browser.msie ? 'formatBlock' : 'heading',
+              arguments: [$.browser.msie ? '<h4>' : 'h4'],
+              tags: ['h4'],
+              tooltip: 'Header 4'
+      },
+      h5: {
+              visible: true,
+              className: 'h5',
+              command: $.browser.msie ? 'formatBlock' : 'heading',
+              arguments: [$.browser.msie ? '<h5>' : 'h5'],
+              tags: ['h5'],
+              tooltip: 'Header 5'
+      },
+      h6: {
+              visible: true,
+              className: 'h6',
+              command: $.browser.msie ? 'formatBlock' : 'heading',
+              arguments: [$.browser.msie ? '<h6>' : 'h6'],
+              tags: ['h6'],
+              tooltip: 'Header 6'
+      },
+      
+      cut   : { visible : true },
+      copy  : { visible : true },
+      paste : { visible : true },
+      html  : { visible: true }
+    }
+  }); 
+  
+	/* tag input field */
+	$("#tags").tagInput({
+		tags:tags,
+		//jsonUrl:"tags.json",
+		sortBy:"frequency",
+		suggestedTags:["jquery", "tagging", "tag", "component", "delicious", "javascript"],
+		tagSeparator:" ",
+		autoFilter:true,
+		autoStart:false,
+		//suggestedTagsPlaceHolder:$("#suggested"),
+		boldify:true
+	});
+
+
+});
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<header id="top">
+		<div class="wrapper">
+			<!-- Title/Logo - can use text instead of image -->
+			<div id="title"><img src="/static/images/logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
+			<!-- Top navigation -->
+			<div id="topnav">
+				<a href="#"><img class="avatar" src="/static/images/user_32.png" alt="" /></a>
+				Logged in as <b>Admin</b>
+				<span>|</span> <a href="#">Settings</a>
+				<span>|</span> <a href="#">Logout</a><br />
+				<small>You have <a href="#" class="high"><b>1</b> new message!</a></small>
+			</div>
+			<!-- End of Top navigation -->
+			<!-- Main navigation -->
+			<nav id="menu">
+				<ul class="sf-menu">
+					<li><a href="dashboard.html">Dashboard</a></li>
+					<li class="current">
+						<a href="styles.html">Styles</a>
+						<ul>
+							<li>
+								<a href="styles.html">Basic Styles</a>
+							</li>
+							<li>
+								<a href="#">Sample Pages...</a>
+								<ul>
+									<li><a href="samples-files.html">Files</a></li>
+									<li><a href="samples-products.html">Products</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="tables.html">Tables</a></li>
+					<li><a href="forms.html">Forms</a></li>	
+					<li><a href="graphs.html">Graphs</a></li>	
+				</ul>
+			</nav>
+			<!-- End of Main navigation -->
+			<!-- Aside links -->
+			<aside><b>English</b> &middot; <a href="#">Spanish</a> &middot; <a href="#">German</a></aside>
+			<!-- End of Aside links -->
+		</div>
+	</header>
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>Samples &rarr; <span>Products</span></h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+				<!-- Left column/section -->
+				<section class="column width6 first">					
+
+					<h3>Add new product</h3>
+					
+					<form id="sampleform" method="post" action="#">
+
+						<fieldset>
+							<legend>Product info</legend>
+
+							<p>
+								<label class="required" for="producttitle">Title</label><br/>
+								<input type="text" id="producttitle" class="half title" value="" name="producttitle"/>
+								<small>e.g. T-Shirt</small>
+							</p>
+
+							<p>
+								<label for="productdesc">Describe your product</label><br/>
+								<textarea id="productdesc" class="large full" name="productdesc"></textarea>
+							</p>
+							
+							<div class="clearfix leading">
+								<div class="column width3 first">
+									<p>
+										<label for="productcat">Product type</label><br/>
+										<select id="productcat" class="full" name="productcat">
+											<option value="1" selected>T-Shirts</option>
+											<option value="2">Misc.</option>
+										</select>
+										<small>e.g. T-Shirts</small>
+									</p>
+									<p><a href="#">+ Add new product type</a></p>
+								</div>
+								
+								<div class="column width3">
+									<p>
+										<label for="productvendor">Product vendor</label><br/>
+										<select id="productvendor" class="full" name="productvendor">
+											<option value="1" selected>Adidas</option>
+											<option value="2">Unknown</option>
+										</select>
+										<small>Product creator or manufacturer e.g. Adidas</small>
+									</p>
+									<p><a href="#">+ Add new category</a></p>
+								</div>
+							</div>
+						
+							<p class="box"><input type="submit" class="btn btn-green big" value="Save"/> or <a href="#">Cancel</a></p>
+
+						</fieldset>
+
+					</form>
+
+				</section>
+				<!-- End of Left column/section -->
+				
+				<!-- Right column/section -->
+				<aside class="column width2">
+					<p><a href="#" class="btn btn-special btn-green"><img src="/static/images/page_white_go.png" class="icon" alt=""/>Preview Product</a></p>
+					<p><a href="#" class="btn btn-special"><img src="/static/images/page_save.png" class="icon" alt=""/>Save Draft</a></p>
+					<div class="content-box">
+						<header>
+							<h3>Product Visibility</h3>
+						</header>
+						<section>
+							Choose whether or not you want this product to be publicly visible.
+							<p>
+								<select id="visibility" class="full" name="visibility">
+									<option value="1" selected>published</option>
+									<option value="2">draft</option>
+								</select>
+							</p>
+						</section>
+					</div>
+					<div class="content-box">
+						<header>
+							<h3>Product Tags</h3>
+						</header>
+						<section>
+							Enter any number of tags separated by space.
+							<p><textarea id="tags" class="small full" name="tags"></textarea></p>
+						</section>
+					</div>
+					<div id="rightmenu">
+						<dl class="first">
+							<dt><img width="16" height="16" alt="" src="/static/images/help.png"></dt>
+							<dd><a href="#">Help</a></dd>
+							<dd class="last">If you are a new user, you should read "Getting started"</dd>							
+						</dl>
+					</div>
+				</aside>
+				<!-- End of Right column/section -->
+				
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+	
+	<!-- Page footer -->
+	<footer id="bottom">
+		<div class="wrapper">
+			<nav>
+				<a href="#">Dashboard</a> &middot;
+				<a href="#">Content</a> &middot;
+				<a href="#">Reports</a> &middot;
+				<a href="#">Users</a> &middot;
+				<a href="#">Media</a> &middot;
+				<a href="#">Events</a> &middot;
+				<a href="#">Newsletter</a> &middot;
+				<a href="#">Settings</a>
+			</nav>
+			<p>Copyright &copy; 2010</p>
+		</div>
+	</footer>
+	<!-- End of Page footer -->
+	
+	<!-- Animated footer -->
+	<footer id="animated">
+		<ul>
+			<li><a href="#">Dashboard</a></li>
+			<li><a href="#">Content</a></li>
+			<li><a href="#">Reports</a></li>
+			<li><a href="#">Users</a></li>
+			<li><a href="#">Media</a></li>
+			<li><a href="#">Events</a></li>
+			<li><a href="#">Newsletter</a></li>
+			<li><a href="#">Settings</a></li>
+		</ul>
+	</footer>
+	<!-- End of Animated footer -->
+	
+	<!-- Scroll to top link -->
+	<a href="#" id="totop">^ scroll to top</a>
+
+<!-- User interface javascript load -->
+<script type="text/javascript" src="/static/js/administry.js"></script>
+</body>
+</html>

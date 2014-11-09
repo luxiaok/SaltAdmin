@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 配置管理</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 表格css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 选项编辑控制 -->
+<script type="text/javascript" src="/static/js/options.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='admin',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>配置管理</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+		  <table width=100%>
+		  <tr>
+			  <td><h3>配置列表</h3></td>
+			  <td>
+              　　按类型显示：<select name="show4idc" id="show4type" class="" onchange="">
+                      <option value=""  selected="selected">所有类型</option>
+                      % for x in SelectType:
+                      <option value="${x['value']}">${x['comment']}</option>
+                      % endfor
+                      <option value="">其他</option>
+                 </select>                
+                  　　显示行数：<select name="showline" id="showline" class="">
+                      <option value="all"  selected="selected">所有行</option>
+                      <option value="line10">10 行</option>
+                      <option value="line20">20 行</option>
+                      <option value="line50">50 行</option>
+                      <option value="line100">100行</option>
+                      <option value="line200">200行</option>
+                      <option value="line500">500行</option>
+                  </select>	
+
+			  </td>
+              <td align='right'><a href="javascript:void(0)" class="btn" onClick="AddOps()"><span class="icon icon-add">&nbsp;</span>添加配置</a></td>
+          </tr>
+          </table>					
+					<table class="datalist" >
+						<thead>
+						    <tr>
+							<th>编号 - ID</th>
+							<th>类型 - Type</th>
+							<th>配置值 - Value</th>
+							<th>备注 - Comment</th>
+							<th>状态 - Status</th>
+							<th>管理 - Admin</th>
+					        </tr>
+						</thead>
+						<tbody>
+							<tr class="dataline optionAdd" id="AddTr">
+							  <form name="AddForm" id="AddForm" method="POST" action="/admin/options">
+							  <input type="input" value="none" name='id' style="display: none;">
+							  <td>自动分配</td>
+							  <td>
+                                  <select name="type" id="type" class="selectOption">
+	                              <option value=""  selected="selected">--选择类型--</option>
+                                  % for x in SelectType:
+                                  <option value="${x['value']}">${x['comment']}</option>
+                                  % endfor
+                                  </select>
+							  </td>
+							  <td><input type="input" name="value" class="optionInput"></td>
+							  <td><input type="input" name="comment" class="optionInput"></td>
+							  <td><select name="status" id="status" class="selectOption">
+                                  <option value="yes" selected="selected">启用</option>
+                                  <option value="no">禁用</option>
+                                  </select></td>							  
+							  <td><a href="javascript:void(0)" onClick="CancellNullOps()">取消</a> | <a href="javascript:void(0)" onClick="ResetForm('AddForm')">重填</a> | <a href="javascript:void(0)" onClick="SubmitOps()">保存</a></td>
+							  </form>
+							</tr>
+							<% i = 1 %>
+                            % for x in OpsData:
+                               <%
+                                  oid = x['id']
+                                  otype = x['type']
+                                  ovalue = x['value']
+                                  ostatus = x['status']
+                                  ocomment = x['comment']
+
+                               %>
+                            <tr class="OptionEdit dataline" id="EditOps${oid}">
+	                          <form name="EditForm${oid}" id="EditForm${oid}" method="POST" action="/admin/options">
+		                      <input type="input" value="${oid}" name='id' style="display: none;">
+							  <td title="ID: ${oid}" class="point">${i}</td>
+							  <td>
+							      <select name="type" id="type" class="selectOption">
+                                  % for x in SelectType:
+                                      % if x['value'] == otype:
+                                      <option value="${x['value']}" selected="selected">${x['comment']}</option>
+                                      % else:
+                                      <option value="${x['value']}">${x['comment']}</option>
+                                      % endif                                    
+                                  % endfor
+                                  </select>
+							  </td>
+							  <td><input type="input" value="${ovalue}" name='value' class="optionInput"></td>
+							  <td><input type="input" value="${ocomment}" name='comment' class="optionInput"></td>
+							  <td><select name="status" id="status" class="selectOption" class="options">
+								  % if ostatus == 'yes':
+                                  <option value="yes" selected="selected">启用</option>
+                                  <option value="no">禁用</option>
+                                  % else:
+                                  <option value="yes">启用</option>
+                                  <option value="no" selected="selected">禁用</option>
+                                  % endif
+                                  </select></td>
+							  <td><a href="javascript:void(0)" onClick="EditOps('ShowOps${oid}','EditOps${oid}')">取消</a> | <a href="" onClick="return isDel()">删除</a> | <a href="javascript:void(0)" onClick="SaveOps('EditForm${oid}')">保存</a></td>
+							  </form>
+							</tr>
+							<tr id="ShowOps${oid}" class="dataline">
+							  <td title="ID: ${oid}" class="point">${i}</td>
+							  <td>${otype}</td>
+							  <td>${ovalue}</td>
+							  <td>${ocomment}</td>
+							  % if ostatus == 'yes':
+							  <td>已启用</td>
+							  <td><a href="javascript:void(0)" onClick="return isDisable()">禁用</a>
+							  % else:
+							  <td>已禁用</td>
+							  <td><a href="javascript:void(0)" onClick="return isEnable()">启用</a>
+							  % endif
+							   | <a href="javascript:void(0)" onClick="return isDel()">删除</a> | <a href="javascript:void(0)" onClick="EditOps('EditOps${oid}','ShowOps${oid}')">编辑</a></td>
+							</tr>
+							<% i += 1 %>
+							% endfor
+						</tbody>
+						<tfoot>
+							<tr>
+							<th>编号 - ID</th>
+							<th>类型 - Type</th>
+							<th>配置值 - Value</th>
+							<th>备注 - Comment</th>
+							<th>状态 - Status</th>
+							<th>管理 - Admin</th>
+							</tr>
+						</tfoot>
+					</table>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

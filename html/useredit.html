@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 用户管理 - 编辑用户</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户添加table样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 用户编辑 -->
+<script type="text/javascript" src="/static/js/users.edit.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='users',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>编辑用户</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+<div id="changePass" class="DisplayNone">
+    <table width=100%>
+      <tr>
+          <td><h3>修改密码</h3></td>
+          <td align='left'></td>
+          <td align='right'><a href="javascript:void(0)" class="btn" OnClick="changeMode('userInfo','changePass')"><span class="icon icon-info">&nbsp;</span>修改资料</a></td>
+      </tr>
+    </table>
+   <form name="passForm" id="passForm" action="/users/password">
+   <table class="maintable" width=60%>
+        <tr>
+		        <td class="textLeft">ID</td>
+		        <td class="inputRight"><input type="text" name="myuid" id="myuid" class="maininput readonly" value="${UserData['id']}" readonly="true"/></td>
+		    </tr>
+	      <tr>
+		        <td class="textLeft">用户名</td>
+		        <td class="inputRight">${UserData['username']}</td>
+		    </tr>
+		    <tr>
+		        <td class="textLeft">姓名</td>
+		        <td class="inputRight">${UserData['nickname']}</td>
+		    </tr>
+		    ## 修改自己的密码需要确认原始密码
+		    <% focusID = "password" %>
+		    % if UserData['id'] == uid:	
+		    <% focusID = "oldpassword" %>      
+		    <tr>
+		        <td class="textLeft">原始密码</td>
+		        <td class="inputRight"><input type="password" name="oldpassword" id="oldpassword" class="maininput" /></td>
+		    </tr>
+		    % endif
+	      <tr>
+		        <td class="textLeft">新密码</td>
+		        <td class="inputRight"><input type="password" name="password" id="password" class="maininput" /></td>
+		    </tr>
+	        <tr>
+		        <td class="textLeft">确认新密码</td>
+		        <td class="inputRight"><input type="password" name="password2" id="password2" class="maininput" /></td>
+		    </tr>
+      </table>
+      <div class="submitArea">
+		    <div class="reset"><a href="javascript:void(0)" onClick="resetForm('passForm','${focusID}')" class="btn" name="reset"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		    <div class="submit"><a href="javascript:void(0)" onClick="submitForm('passForm')" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+	    </div>
+      </form>
+</div>
+<div id="userInfo">
+    <table width=100%>
+      <tr>
+          <td><h3>用户名：${UserData['username']}</h3></td>
+          <td align='left'></td>
+          <td align='right'><a href="javascript:void(0)" class="btn" OnClick="changeMode('changePass','userInfo')"><span class="icon icon-key">&nbsp;</span>修改密码</a></td>
+      </tr>
+    </table>
+		<form name="userForm" id="userForm" action="/users/edit" method="post" >
+		    <input type="text" name="myuid" id="myuid" class="DisplayNone" value="${UserData['id']}" />
+		    <input type="text" name="username" id="username" class="DisplayNone" value="${UserData['username']}"/>
+        <table class="maintable" width="100%">
+	        <tr>
+		        <td class="textLeft">姓名</td>
+		        <td class="inputRight"><input type="text" name="nickname" id="nickname" class="maininput" value="${UserData['nickname']}"/></td>
+		        <td class="textLeft" width="25%">注册日期</td>
+		        <td class="inputRight" width="25%">${UserData['regdate']}</td>
+		    </tr>
+	        <tr>
+		        <td class="textLeft">手机号</td>
+		        <td class="inputRight"><input type="text" name="mobile" class="maininput" value="${UserData['mobile']}"/></td>
+		        <td class="textLeft">登录日期</td>
+		        <td class="inputRight">${UserData['logindate']}</td>
+		    </tr>
+	        <tr>
+		        <td class="textLeft">E-Mail</td>
+		        <td class="inputRight"><input type="text" name="email" class="maininput" value="${UserData['email']}"/></td>
+		        <td class="textLeft">登录IP地址</td>
+		        <td class="inputRight">${UserData['loginhost']}</td>
+		    </tr>
+		    <tr>
+		        <td class="textLeft">备注信息</td>
+		         <td class="inputRight"><input type="text" name="comment" class="maininput" value="${UserData['comment']}"/></td>
+		        <td class="textLeft">登录地区</td>
+		        ##<td class="inputRight"><%include file="ip.html" args="ip=UserData['loginhost']" /></td>
+		        <td class="inputRight">${UserData['location']}</td>
+		    </tr>
+		    <tr>
+		        <td class="textLeft">级别</td>
+		        <td class="inputRight">
+			        ## 修改自己的属性时，不允许修改级别和状态
+			        % if UserData['level'] == 0:
+                  % if UserData['id'] == uid:
+                  <input type="radio" name="level" value="0" checked="checked" disabled="true" />
+                  % else:
+                  <input type="radio" name="level" value="0" checked="checked" />
+                  % endif
+              % else:
+                  % if UserData['id'] != uid:
+                  <input type="radio" name="level" value="0" />
+                  % else:
+                  <input type="radio" name="level" value="0" disabled="true"/>
+                  % endif
+              % endif
+                  <label for="level0">管理者</label>&nbsp;&nbsp;&nbsp;
+              % if UserData['level'] == 1:
+                  % if UserData['id'] == uid:
+                  <input type="radio" name="level" value="1" checked="checked" disabled="true" />
+                  % else:
+                  <input type="radio" name="level" value="1" checked="checked" />
+                  % endif
+              % else:
+                  % if UserData['id'] != uid:
+                  <input type="radio" name="level" value="1" />
+                  % else:
+                  <input type="radio" name="level" value="1" disabled="true" />
+                  % endif
+              % endif
+                  <label for="level1">普通用户</label>
+             </td>
+		        <td class="textLeft">登录浏览器</td>
+		        <td class="inputRight">${UserData['UA']}</td>
+		    </tr>
+		    <tr>
+		         <td class="textLeft">状态</td>
+		        ## 修改自己的属性时，不允许修改级别和状态
+		        <td class="inputRight">
+			      % if UserData['status'] == 'yes':
+                % if UserData['id'] == uid:
+                <input type="radio" name="status" value="yes" checked="checked" disabled="true" />
+                % else:
+                <input type="radio" name="status" value="yes" checked="checked" />
+                % endif
+            % else:
+                % if UserData['id'] != uid:
+                <input type="radio" name="status" value="yes" />
+                % else:
+                <input type="radio" name="status" value="yes" disabled="true" />
+                % endif
+            % endif
+                <label for="styes">启用</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            % if UserData['status'] == 'no':
+                % if UserData['id'] == uid:
+                <input type="radio" name="status" value="no" checked="checked" disabled="true" />
+                % else:
+                <input type="radio" name="status" value="no" checked="checked" />
+                % endif
+            % else:
+                % if UserData['id'] != uid:
+                <input type="radio" name="status" value="no" />
+                % else:
+                <input type="radio" name="status" value="no" disabled="true" />
+                % endif
+            % endif
+                <label for="stno">禁用</label>
+			      </td>
+             <td class="textLeft">是否在线</td>
+		         <td class="inputRight">在线~ing~~</td>
+		      </tr>
+	    </table>
+	     <div class="submitArea">
+		    <div class="reset"><a href="javascript:void(0)" onClick="resetForm('userForm','nickname')" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		    <div class="submit"><a href="javascript:void(0)" onClick="document.forms('userForm').submit()" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+	     </div>
+        </form>
+        </div>
+	</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

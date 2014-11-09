@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - Redis监控平台</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- jQuery with plugins  -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN :
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 监控数据展示   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+注意：这里1.8.2与1.4.2在一起不兼容，有冲突，使用1.7.1才兼容
+升级到jquery-1.8.3.min.js
+-->
+<script type="text/javascript" src="/static/js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="/static/js/highcharts/modules/exporting.js"></script>
+<script type="text/javascript">
+$(function () {
+        $('#m_redis_display1').highcharts({
+            credits: {
+                enabled: true,
+                text: 'Luxiaok.com',
+                href: 'http://cto.luxiaok.com'
+            },
+            title: {
+                text: 'Redis Status - 172.16.211.50',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Memory Usage',
+                x: -20
+            },
+            xAxis: {
+                categories: ['08:00:00', '09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00',
+                             '16:00:00', '17:00:00', '18:00:00', '19:00:00', '20:00:00', '21:00:00', '22:00:00', '23:00:00'],
+                //labels: {
+                //rotation: -45
+                //}
+            },
+                
+            yAxis: {
+                title: {
+                    text: 'Memory (GB)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                      },
+                ],
+                labels: {
+                    formatter: function() {
+                        return this.value +' GB'
+                    }
+                },
+                // 最低值起点
+                min:0,
+                // 标准线
+                plotLines:[{
+                       color:'red',           //线的颜色，定义为红色
+                       dashStyle:'solid',     //默认值，这里定义为实线
+                       value:24,              //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+                       width:1,               //标示线的宽度，1px
+                       label:{
+                          align:'right',
+                          text: '警戒线：24 GB',
+                              x: -5
+                           }
+                }]
+
+            },
+            tooltip: {
+                valueSuffix: ' GB'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: '6400',
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6, 10.5, 9.8, 9.9, 8.8]
+            }, {
+                name: '6408',
+                data: [1.2, 0.8, 5.7, 11.3, 17.0, 25.0, 24.8, 22.1, 20.1, 18.8, 8.6, 2.5, 5.8, 4.0, 3.9, 3.8]
+            }, {
+                name: '6410',
+                data: [1.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0, 2.0, 3.5, 4.0, 2.8]
+            }, {
+                name: '6500',
+                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8, 5.8, 4.1, 4.3, 4.5]
+            }]
+        });
+        
+        // 实例2
+        $('#m_redis_display2').highcharts({
+            credits: {
+                enabled: true,
+                text: 'Luxiaok.com',
+                href: 'http://cto.luxiaok.com'
+            },
+            title: {
+                text: 'Redis Status - 172.16.211.51',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Memory Usage',
+                x: -20
+            },
+            xAxis: {
+                categories: ['08:00:00', '09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00', '15:00:00',
+                             '16:00:00', '17:00:00', '18:00:00', '19:00:00', '20:00:00', '21:00:00', '22:00:00', '23:00:00'],
+                //labels: {
+                //rotation: -45
+                //}
+            },
+                
+            yAxis: {
+                title: {
+                    text: 'Memory (GB)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                      },
+                ],
+                labels: {
+                    formatter: function() {
+                        return this.value +' GB'
+                    }
+                },
+                // 最低值起点
+                min:0,
+                // 标准线
+                plotLines:[{
+                       color:'red',           //线的颜色，定义为红色
+                       dashStyle:'solid',     //默认值，这里定义为实线
+                       value:24,              //定义在那个值上显示标示线，这里是在x轴上刻度为3的值处垂直化一条线
+                       width:1,               //标示线的宽度，1px
+                       label:{
+                          align:'right',
+                          text: '警戒线：24 GB',
+                              x: -5
+                           }
+                }]
+
+            },
+            tooltip: {
+                valueSuffix: ' GB'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: '6401',
+                data: [2.0, 2.9, 2.5, 2.5, 2.2, 3.5, 5.2, 6.5, 7.3, 8.3, 13.9, 9.6, 10.5, 9.8, 9.9, 8.8]
+            }, {
+                name: '6402',
+                data: [1.2, 1.8, 1.7, 1.3, 2.0, 2.0, 4.8, 4.1, 3.1, 2.8, 3.6, 2.5, 4.8, 4.0, 4.9, 5.8]
+            }, {
+                name: '6409',
+                data: [2.2, 3.6, 4.5, 6.4, 6.5, 7.0, 8.6, 7.9, 5.8, 6.0, 2.9, 3.0, 4.0, 4.5, 4.0, 4.8]
+            }, {
+                name: '6417',
+                data: [2.9, 4.2, 5.7, 8.5, 11.9, 15.2, 15.1, 16.6, 14.2, 10.3, 6.6, 4.8, 5.8, 4.1, 4.3, 4.5]
+            }, {
+                name: '6418',
+                data: [11, 12, 13, 14, 15, 15.6, 15.9, 15.1, 15.2, 14.3, 14.6, 14.8, 14.8, 13.1, 12.3, 10.5]
+            }]
+        });
+        
+    });
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='monitor',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>Redis监控平台</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+    <div id="m_redis_display1" style="min-width: 310px; height: 400px; margin: 0 auto; width: 1100px"></div>
+    <div id="m_redis_display2" style="min-width: 310px; height: 400px; margin: 0 auto; width: 1100px"></div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

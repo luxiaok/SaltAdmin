@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>SaltStack Admin Login</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="/static/css/login.css" type="text/css" />
+	<!-- Javascript libraries (jQuery and Selectivizr) used for the custom checkbox -->
+        <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/static/js/login.js"></script>
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script type="text/javascript" src="/static/js/selectivizr.js"></script>
+		<noscript><link rel="stylesheet" href="/static/css/loginfallback.css" /></noscript>
+	<![endif]-->
+
+	</head>
+
+	<body onload="document.getElementById('username').focus();">
+		<div id="container">
+			<!--<form name="LoginForm" action="/login" method="POST" onsubmit="return CheckLoginForm();">-->
+                            <form name="LoginForm" action="/login" id="LoginForm">
+				<div class="login">SaltStack Admin</div>
+				<div class="username-text">用户名：</div>
+				<div class="password-text">密　码：</div>
+				<div class="username-field">
+					<input id="username" type="text" name="username" value="" />
+				</div>
+				<div class="password-field">
+					<input type="password" name="password" value="" />
+				</div>
+				<input type="checkbox" name="rememberMe" id="rememberMe" /><label for="rememberMe">记住我</label>
+				<div class="forgot-usr-pwd">忘记 <a href="javascript:void(0)" onClick="lossPass();">用户名</a> 或 <a href="javascript:void(0)" onClick="lossPass();">密码</a></div>
+				<input id="login_submit" name="submit" value="GO" type="button" onClick="submitForm('LoginForm')" />
+			</form>
+		</div>
+		<div id="footer">
+			Copyright &copy; 2014.XK-Studio All rights reserved.<a target="_blank" href="http://cto.luxiaok.com/">陆小K</a>
+		</div>
+</body>
+</html>

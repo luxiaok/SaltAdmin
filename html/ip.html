@@ -1,0 +1,12 @@
+<%page args="ip"/>
+% if ip:
+<script language="javascript" type="text/javascript" src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip=${ip}"></script>
+<script type="text/javascript">
+if (remote_ip_info.ret == 1)
+    document.write(remote_ip_info.country+" "+remote_ip_info.province+" "+remote_ip_info.city+" ["+remote_ip_info.isp+"]");
+else
+    document.write('未知区域或者本地局域网')
+</script>
+% else:
+    None
+% endif

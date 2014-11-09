@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - MySQL监控平台</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- jQuery with plugins  -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN :
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 监控数据展示   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+注意：这里1.8.2与1.4.2在一起不兼容，有冲突，使用1.7.1才兼容
+-->
+<script type="text/javascript" src="/static/js/highcharts/highcharts.js"></script>
+<script type="text/javascript" src="/static/js/highcharts/modules/exporting.js"></script>
+<script type="text/javascript">
+$(function () {
+        $('#m_MYSQL_display').highcharts({
+            credits: {
+                enabled: true,
+                text: 'Luxiaok.com',
+                href: 'http://cto.luxiaok.com'
+            },
+            chart: {
+                type: 'spline'
+            },
+            title: {
+                text: 'MySQL Status - 172.16.198.128'
+            },
+            subtitle: {
+                text: 'Instance Status - Memory'
+            },
+            xAxis: {
+                categories: ['09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00',
+                    '15:00:00', '16:00:00', '17:00:00', '18:00:00', '19:00:00', '20:00:00']
+            },
+            yAxis: {
+                title: {
+                    text: 'Memory (GB)'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value +' GB'
+                    }
+                }
+            },
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        radius: 4,
+                        lineColor: '#666666',
+                        lineWidth: 1
+                    }
+                }
+            },
+            series: [{
+                name: '3306',
+                marker: {
+                    symbol: 'square'
+                },
+                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
+                    y: 26.5,
+                    marker: {
+                        symbol: 'url(http://www.highcharts.com/demo/gfx/sun.png)'
+                    }
+                }, 23.3, 18.3, 13.9, 9.6]
+    
+            }, {
+                name: '3307',
+                marker: {
+                    symbol: 'diamond'
+                },
+                data: [{
+                    y: 3.9,
+                    marker: {
+                        symbol: 'url(http://www.highcharts.com/demo/gfx/snow.png)'
+                    }
+                }, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            }]
+        });
+    });
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='monitor',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>MySQL监控平台</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+    <div id="m_MYSQL_display" style="min-width: 310px; height: 400px; margin: 0 auto; width: 1100px"></div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

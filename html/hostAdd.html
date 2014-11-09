@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 主机管理 - 添加主机</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 新增主机 -->
+<script type="text/javascript" src="/static/js/hosts.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='hosts',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>添加主机</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+<form name="hostForm" id="hostForm" action="/hosts/add">
+<table class="maintable">
+  <tr>
+      <input type="text" name="id" id="id" class="maininput" value="none" style="display:none"/>
+      <td class="textLeft">主机名</td>
+      <td class="inputRight"><input type="text" name="hostname" id="hostname" class="maininput"/></td>
+      <td class="textLeft">待定功能</td>
+      <td class="inputRight"><input type="text" name="dpt" class="maininput" /></td>
+  </tr>
+  <tr>
+      <td class="textLeft">域名</td>
+      <td class="inputRight"><input type="text" name="domain" class="maininput" /></td>
+      <td class="textLeft">型号</td>
+      <td class="inputRight"><select name="model" id="model" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择型号 --</option>
+        % for x in SD['model']:
+        <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">角色</td>
+      <td class="inputRight"><select name="role" id="role" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择角色 --</option>
+        % for x in SD['role']:
+        <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+      <td class="textLeft">CPU</td>
+      <td class="inputRight"><select name="cpu" id="cpu" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择CPU型号 --</option>
+        % for x in SD['cpu']:
+        <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">操作系统</td>
+      <td class="inputRight"><select name="os" id="os" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择操作系统 --</option>
+        % for x in SD['os']:
+        <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+      <td class="textLeft">内存</td>
+      <td class="inputRight"><select name="mem" id="mem" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择内存类型 --</option>
+        % for x in SD['mem']:
+          <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">内网IP1</td>
+      <td class="inputRight">
+      <select name="iface0" id="iface0">
+        <option value="eth0" selected="selected">eth0</option>
+        <option value="eth1">eth1</option>
+        <option value="eth2">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="priip1" id="priip1"/>
+      </td>
+      <td class="textLeft">硬盘</td>
+      <td class="inputRight"><select name="hdd" id="hdd" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择硬盘类型 --</option>
+        % for x in SD['hdd']:
+          <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">公网IP1</td>
+      <td class="inputRight">
+      <select name="iface1" id="iface1">
+        <option value="eth0">eth0</option>
+        <option value="eth1" selected="selected">eth1</option>
+        <option value="eth2">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="pubip1" id="pubip1"/>
+      </td>
+      <td class="textLeft">IDC</td>
+      <td class="inputRight"><select name="idc" id="idc" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择IDC --</option>
+        % for x in SD['idc']:
+          <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">内网IP2</td>
+      <td class="inputRight">
+      <select name="iface2" id="iface2">
+        <option value="eth0">eth0</option>
+        <option value="eth1">eth1</option>
+        <option value="eth2" selected="selected">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="priip2" />
+      </td>
+      <td class="textLeft">机柜编码</td>
+      <td class="inputRight"><select name="idctag" id="idctag" class="selectmenu">
+	    <option value=""  selected="selected">-- 选择机柜 --</option>
+        % for x in SD['idctag']:
+          <option value="${x['id']}">${x['value']}</option>
+        % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">公网IP2</td>
+      <td class="inputRight">
+        <select name="iface3" id="iface3">
+          <option value="eth0">eth0</option>
+          <option value="eth1">eth1</option>
+          <option value="eth2">eth2</option>
+          <option value="eth3" selected="selected">eth3</option>
+          <option value="em0">em0</option>
+          <option value="em1">em1</option>
+          <option value="em2">em2</option>
+          <option value="em3">em3</option>
+       </select>
+      <input type="text" name="pubip2" /></td>
+      <td class="textLeft">服务器标签</td>
+      <td class="inputRight"><input type="text" name="stag" class="maininput" value="IDC8-XK-Dell-88"/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">远程管理IP</td>
+      <td class="inputRight"><input type="text" name="adminip" class="maininput" value="192.168.0.128" /></td>
+      <td class="textLeft">资产编码</td>
+      <td class="inputRight"><input type="text" name="rnum" class="maininput" value="XK-Server-888" /></td>
+  </tr>
+  <tr>
+      <td class="textLeft">类型</td>
+      <td class="inputRight"><input type="text" name="type" class="maininput" value="Public" /></td>
+      <td class="textLeft">服务编码</td>
+      <td class="inputRight"><input type="text" name="snum" class="maininput" value="Dell-S888"/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">状态</td>
+      <td class="inputRight"><select name="status" id="status" class="selectmenu">
+          <option value="OnLine" selected="selected">在线</option>
+          <option value="Offline">离线</option>
+          <option value="Unknown">未知</option>
+          <option value="Other">其他</option>
+          </select></td>
+      <td class="textLeft">入库日期</td>
+      <%!
+       import time
+       NowDate = time.strftime("%Y-%m-%d",time.localtime(time.time()))
+      %>
+      <td class="inputRight"><input type="text" name="storagedate" class="maininput" value="${NowDate}"/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">备注</td>
+      <td class="inputRight"><input type="text" name="comment" class="maininput" /></td>
+      <td class="textLeft">上架日期</td>
+      <td class="inputRight"><input type="text" name="startdate" class="maininput" value="${NowDate}"/></td>
+  </tr>
+</table>
+    <div class="submitArea">
+		<div class="reset"><a href="javascript:void(0)" onClick="resetForm()" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		<div class="submit"><a href="javascript:void(0)" onClick="submitForm('hostForm')" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+	</div>
+</form>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

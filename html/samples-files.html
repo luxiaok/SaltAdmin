@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>Admin Template</title>
+<meta name="description" content="Administry - Admin Template by www.865171.cn" />
+<meta name="keywords" content="Admin,Template" />
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+<!-- Colour Schemes
+Default colour scheme is blue. Uncomment prefered stylesheet to use it.
+<link rel="stylesheet" href="css/brown.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/gray.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/green.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/pink.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/red.css" type="text/css" media="screen" />
+-->
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="css/custom.css" type="text/css" />
+<!--swfobject - needed only if you require <video> tag support for older browsers -->
+<script type="text/javascript" src="/static/js/swfobject.js"></script>
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- Could be loaded remotely from Google CDN : <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" src="/static/js/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.widget.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.tabs.min.js"></script>
+<!-- jQuery tooltips -->
+<script type="text/javascript" src="/static/js/jquery.tipTip.min.js"></script>
+<!-- Superfish navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- jQuery popup box -->
+<script type="text/javascript" src="/static/js/jquery.nyroModal.pack.js"></script>
+<!-- jQuery form validation -->
+<script type="text/javascript" src="/static/js/jquery.validate_pack.js"></script>
+<!-- Internet Explorer Fixes --> 
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" media="all" href="css/ie.css"/>
+<script src="/static/js/html5.js"></script>
+<![endif]-->
+<!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+<!--[if lt IE 8]>
+<script src="/static/js/IE8.js"></script>
+<![endif]-->
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	/* setup navigation, content boxes, etc... */
+	Administry.setup();
+
+	/* progress bar animations - setting initial values */
+	Administry.progress("#capacity", 72, 100);
+	
+	/* tabs */
+	$("#tabs").tabs();
+	
+});
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<header id="top">
+		<div class="wrapper">
+			<!-- Title/Logo - can use text instead of image -->
+			<div id="title"><img src="/static/images/logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
+			<!-- Top navigation -->
+			<div id="topnav">
+				<a href="#"><img class="avatar" src="/static/images/user_32.png" alt="" /></a>
+				Logged in as <b>Admin</b>
+				<span>|</span> <a href="#">Settings</a>
+				<span>|</span> <a href="#">Logout</a><br />
+				<small>You have <a href="#" class="high"><b>1</b> new message!</a></small>
+			</div>
+			<!-- End of Top navigation -->
+			<!-- Main navigation -->
+			<nav id="menu">
+				<ul class="sf-menu">
+					<li><a href="dashboard.html">Dashboard</a></li>
+					<li class="current">
+						<a href="styles.html">Styles</a>
+						<ul>
+							<li>
+								<a href="styles.html">Basic Styles</a>
+							</li>
+							<li>
+								<a href="#">Sample Pages...</a>
+								<ul>
+									<li><a href="samples-files.html">Files</a></li>
+									<li><a href="samples-products.html">Products</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="tables.html">Tables</a></li>
+					<li><a href="forms.html">Forms</a></li>	
+					<li><a href="graphs.html">Graphs</a></li>	
+				</ul>
+			</nav>
+			<!-- End of Main navigation -->
+			<!-- Aside links -->
+			<aside><b>English</b> &middot; <a href="#">Spanish</a> &middot; <a href="#">German</a></aside>
+			<!-- End of Aside links -->
+		</div>
+	</header>
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>Samples &rarr; <span>Files</span></h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+				<!-- Left column/section -->
+				<section class="column width6 first">					
+
+					<h3>Uploaded Files</h3>
+					
+					<div id="tabs">
+						<ul>
+							<li><a class="corner-tl" href="#tabs-date">List by date</a></li>
+							<li><a class="corner-tr" href="#tabs-abc">List by alphabet</a></li>
+						</ul>
+						<div id="tabs-date">
+							<div class="colgroup">
+								<div class="width3 column first">
+									<p>Showing <b>1-5</b> of <b>68</b> results</p>
+								</div>
+								<div class="width3 column">
+									<p class="pagination ta-right">
+										<a href="#">«</a>
+										<a class="pagination-active" href="#">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										...
+										<a href="#">12</a>
+										<a href="#">13</a>
+										<a href="#">14</a>
+										<a href="#">»</a>
+									</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<hr />
+							
+							<h5>Friday, 16th of April 2010</h5>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#" title="First working version of my CV"><b class="big">My Resume.doc</b></a><br/>
+									<small><b>75kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">cv</a> <a href="#">resume</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">My Resume - v2.doc</b></a><br/>
+									<small><b>74kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">cv</a> <a href="#">resume</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>		
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">License Agreement.pdf</b></a><br/>
+									<small><b>12kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">license</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+							<h5>Thursday, 15th of April 2010</h5>
+
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#" title="1600x1200, needs resizing"><b class="big">profile picture.jpg</b></a><br/>
+									<small><b>534kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">profile</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+						
+							<div class="clearfix"></div>
+							
+							<h5>Monday, 12th of April 2010</h5>
+
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">Tutorial1.avi</b></a><br/>
+									<small><b>12MB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">tutorials</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							<hr/>
+							<div class="colgroup leading">
+								<div class="width3 column first">
+									<p>Showing <b>1-5</b> of <b>68</b> results</p>
+								</div>
+								<div class="width3 column">
+									<p class="pagination ta-right">
+										<a href="#">«</a>
+										<a class="pagination-active" href="#">1</a>
+										<a href="#">2</a>
+										<a href="#">3</a>
+										...
+										<a href="#">12</a>
+										<a href="#">13</a>
+										<a href="#">14</a>
+										<a href="#">»</a>
+									</p>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+						
+						</div>
+						<div id="tabs-abc">
+							<p class="pagination ta-center">
+								<a href="#">0-9</a>
+								<a href="#">A</a>
+								<a href="#">B</a>
+								<a href="#">C</a>
+								<a href="#">D</a>
+								<a href="#">E</a>
+								<a href="#">F</a>
+								<a href="#">G</a>
+								<a href="#">H</a>
+								<a href="#">I</a>
+								<a href="#">J</a>
+								<a href="#">K</a>
+								<a href="#">L</a>
+								<a href="#">M</a>
+								<a href="#">N</a>
+								<a href="#">O</a>
+								<a href="#">P</a>
+								<a href="#">Q</a>
+								<a href="#">R</a>
+								<a href="#">S</a>
+								<a href="#">T</a>
+								<a href="#">U</a>
+								<a href="#">V</a>
+								<a href="#">W</a>
+								<a href="#">X</a>
+								<a href="#">Y</a>
+								<a href="#">Z</a>
+							</p>
+							<hr/>
+							
+							<h3>L</h3>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">License Agreement.pdf</b></a><br/>
+									<small><abbr title="Thursday, 15th of April 2010">3 days ago</abbr> | <b>12kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">license</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							
+							<h3>M</h3>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#" title="First working version of my CV"><b class="big">My Resume.doc</b></a><br/>
+									<small><abbr title="Friday, 16th of April 2010">2 days ago</abbr> | <b>75kB</b> | Author: <b>UITemplates.com</b> | Tags: <a href="#">cv</a> <a href="#">resume</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">My Resume - v2.doc</b></a><br/>
+									<small><abbr title="Friday, 16th of April 2010">2 days ago</abbr> | <b>74kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">cv</a> <a href="#">resume</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							
+							<h3>P</h3>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#" title="1600x1200, needs resizing"><b class="big">profile picture.jpg</b></a><br/>
+									<small><abbr title="Friday, 16th of April 2010">2 days ago</abbr> | <b>534kB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">profile</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							
+							<h3>T</h3>
+							
+							<div class="colgroup leading">
+								<div class="width1 column first ta-center">
+									<img src="/static/images/preview-not-available.gif" alt="" />
+								</div>
+								<div class="width5 column">
+									<a href="#"><b class="big">Tutorial1.avi</b></a><br/>
+									<small><abbr title="Friday, 16th of April 2010">2 days ago</abbr> | <b>12MB</b> |  Author: <b>UITemplates.com</b> |  Tags: <a href="#">tutorials</a></small><br/>
+									<a href="#">remove</a> &middot; <a href="#">show</a> &middot; <a href="#">edit</a>
+								</div>
+							</div>
+						
+						</div>
+					</div> 
+
+				</section>
+				<!-- End of Left column/section -->
+				
+				<!-- Right column/section -->
+				<aside class="column width2">
+					<p class="leading"><a href="#" class="btn btn-special btn-green"><img src="/static/images/add.png" class="icon" alt=""/>Upload new file</a></p>
+					<div class="box">
+						You are now using <b class="big">72%</b> of your allowed storage capacity.
+						<div id="capacity" class="progress progress-green"><span><b></b></span></div>
+					</div>
+					<div class="content-box">
+						<header>
+							<h3>Tags</h3>
+						</header>
+						<section>
+							<div class="tagcloud">
+								<a href="#" class="tag1">lorem</a> <a href="#" class="tag5">ipsum</a> <a href="#" class="tag1">dolor</a> <a href="#" class="tag3">sit</a> <a href="#" class="tag1">amet</a>
+							</div>
+						</section>
+					</div>
+				</aside>
+				<!-- End of Right column/section -->
+				
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+	
+	<!-- Page footer -->
+	<footer id="bottom">
+		<div class="wrapper">
+			<nav>
+				<a href="#">Dashboard</a> &middot;
+				<a href="#">Content</a> &middot;
+				<a href="#">Reports</a> &middot;
+				<a href="#">Users</a> &middot;
+				<a href="#">Media</a> &middot;
+				<a href="#">Events</a> &middot;
+				<a href="#">Newsletter</a> &middot;
+				<a href="#">Settings</a>
+			</nav>
+			<p>Copyright &copy; 2010</p>
+		</div>
+	</footer>
+	<!-- End of Page footer -->
+	
+	<!-- Animated footer -->
+	<footer id="animated">
+		<ul>
+			<li><a href="#">Dashboard</a></li>
+			<li><a href="#">Content</a></li>
+			<li><a href="#">Reports</a></li>
+			<li><a href="#">Users</a></li>
+			<li><a href="#">Media</a></li>
+			<li><a href="#">Events</a></li>
+			<li><a href="#">Newsletter</a></li>
+			<li><a href="#">Settings</a></li>
+		</ul>
+	</footer>
+	<!-- End of Animated footer -->
+	
+	<!-- Scroll to top link -->
+	<a href="#" id="totop">^ scroll to top</a>
+
+<!-- User interface javascript load -->
+<script type="text/javascript" src="/static/js/administry.js"></script>
+</body>
+</html>

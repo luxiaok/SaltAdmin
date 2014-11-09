@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 批量命令</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- SaltStack By Xiaok -->
+<script type="text/javascript" src="/static/js/salt.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='salt',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>SaltStack命令下发</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div style="margin-top:10px;">
+	     ##<form id="CmdForm" method="POST" action="/salt/cmd">
+		  <table width=100%>
+		  <tr>
+			  <td align='left'>执行主机：<input name="tgt" id="tgt" value="*" >
+			           匹配规则：<select name="expr_form" id="expr_form" >
+                              <option value="glob"  selected="selected">glob</option>
+                              <option value="pcre">pcre</option>
+                              <option value="list">list</option>
+                              <option value="grain">grain</option>
+                              <option value="grain_pcre">grain_pcre</option>
+                              <option value="pillar">pillar</option>
+                              <option value="nodegroup">nodegroup</option>
+                              <option value="range">range</option>
+                              <option value="compound">compound</option></select>
+			           执行模块：<select name="fun" id="fun" >
+                      ##<option value="No Model"  selected="selected">- 请选择执行模块 -</option>
+                      % for i in cmds:
+                      <option value="${i}">${i}</option>
+                      % endfor
+                 </select>
+                 执行超时：<input name="timeout" id="timeout" value="None" size="3">         
+                 执行命令：<input name="arg" id="arg" value="echo Hello World" size="32">
+			  </td>
+              ##<td align='right'><a href="javascript:void(0)" class="btn" OnClick="document.getElementById('CmdForm').submit();"><span class="icon icon-ok">&nbsp;</span>执行命令</a></td>
+              <td align='right'><a id="running_key" href="javascript:void(0)" class="btn" OnClick="SaltCmd();"><span class="icon icon-ok">&nbsp;</span>执行命令</a></td>
+          </tr>
+          </table>
+          ##</form>
+					<table class="datalist" id="datalist">
+						<thead>
+						 <tr>
+							<th width="38px">ID</th>
+							<th width="168px">Minion ID</th>
+							<th>执行输出</th>
+							<th width="80px">执行结果</th>
+					    </tr>
+						</thead>
+						<tbody id="CmdRtList">
+						  <tr class="dataline">
+						    <td>1</td>
+						    <td>等待输入</td>
+						    <td>等待执行 ...</td>
+						    <td><font color="green">Ready</font></td>
+						  </tr>
+						</tbody>
+						<tfoot>
+							<tr>
+							<th>ID</th>
+							<th>Minion ID</th>
+							<th>执行输出</th>
+							<th>执行结果</th>
+					    </tr>
+						</tfoot>
+					</table>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

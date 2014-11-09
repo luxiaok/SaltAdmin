@@ -1,0 +1,214 @@
+/* 添加和编辑界面 */
+
+input.readonly
+{
+   border-top:0px ;
+   border-left:0px ;
+   border-right:0px ;
+   border-bottom:0px ;
+   background-color: #ECF5FF;
+}
+
+table.maintable {
+    width:100%;
+    height:100px;
+    background-color: #fff;
+    /*border:2px solid #2A7AD2;*/
+}
+td.textLeft {
+	background-color: #2A7AD2;
+	color: #fff;
+	width: 25%;
+	height: 38px;
+	text-align: right;
+	vertical-align: middle;
+	font-size: 14px;
+	padding-right:8px;
+	/*border-right: #f6f6f6 1px solid; 
+    border-top: #f9f9f9 1px solid;
+    border-left: #f9f9f9 1px solid;
+    border-bottom: #f5f5f5 1px solid;*/
+}
+
+td.inputRight {
+    background-color: #ECF5FF;
+    text-align: left;
+	  vertical-align: middle;
+	  font-size: 14px;
+	  padding-left:8px;
+}
+
+input.maininput {
+	width:  220px;
+  height: 20px;
+}
+
+/* 下拉选项宽度 */
+select.selectmenu {
+	width:150px;
+}
+
+/* 管理界面 */
+
+/* 行的鼠标滑过高亮颜色 */
+.datalist tr:hover { 
+    background:#2A7AD2;
+    color:#FFF;
+} 
+.datalist tr:hover a:link {
+    color:#FFF;
+}
+.datalist tr:hover a:hover {
+    color:#FFC806;
+}
+
+/* table的整体效果 */
+table.datalist {
+	border-collapse:collapse;
+	position:relative;
+	margin-top:1em;
+	margin-bottom:1em;
+	margin: 4px auto;
+	width: 100%;
+	clear: both;
+}
+
+/* 行与行之间的分割线颜色，这里是虚线 */
+tr.dataline {
+   border-bottom: dashed #BEBEBE 1px;
+}
+
+/* 行与行之间的分割线1和2，实线 */
+tr.dataline1 {
+   /*border-top: solid #4F4F4F 1px;*/
+   border-bottom: dashed #BEBEBE 1px;
+   background-color:#D9FFFF;
+}
+tr.dataline2 {
+   /*border-top: solid #4F4F4F 1px;*/
+   border-bottom: dashed #BEBEBE 1px;
+   background-color:#C4E1FF;
+}
+
+/* 字体颜色 */
+font.ok {
+   color: #00BB00;
+}
+td.ok {
+   color: #00BB00;
+}
+td.unnormal {
+   color: #FF2D2D;
+}
+
+tfoot,thead,th.datalist{
+	border-top:solid 1px #eee; /* 鼠标滑过第一行时高亮背景与table标题栏留1像素空隙 */
+	border-bottom:solid 1px #eee; /* 鼠标滑过最后一行时高亮背景与底部标题栏留1像素空隙 */
+}
+
+table.datalist th,table.datalist td {
+	line-height:18px;
+	padding:8px 2px;
+	/*padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 2px;
+	padding-right: 2px;*/
+	text-align:center;
+}
+
+table.datalist th {
+	background-color:#2A7AD2 !important;
+	color:#fff;
+}
+
+/* 实现奇偶行的不同背景 
+.datalist tbody tr:nth-child(even) td,
+.datalist tbody tr:nth-child(even) th {background-color:#D4FFFF;}
+.datalist tbody tr:nth-child(odd) td,
+.datalist tbody tr:nth-child(odd) th {background-color:#D4BFFF;}
+*/
+
+/* 提交按钮区域样式 */
+.submitArea {
+  width: 100%;
+  height: 28px;
+  text-align: center;
+}
+.reset {
+  padding-top: 12px;
+  padding-left: 40px;
+  padding-bottom: 12px;
+  float: left;
+  width: 48%;
+}
+.submit {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  float: left;
+  width: 10%;
+}
+
+/* 选项管理界面 */
+
+.optionAdd {
+	display: none;
+}
+
+.OptionEdit {
+	display: none;
+}
+
+input.options {
+   text-align: center;
+   border-bottom-style: none;
+   border-top-style: none; 
+   border-right-style: none; 
+   border-left-style: none; 
+}
+
+input.optionInput {
+	width:  160px;
+  height: 20px;
+}
+
+/* 下拉选项宽度 */
+select.selectOption {
+	width:100px;
+}
+
+/* 鼠标滑过，指针变手掌形 */
+.point {
+  cursor:pointer;
+}
+
+.DisplayNone {
+	display:none;
+}
+
+/* 项目配置管理 */
+.LineLeft {
+  float:left;
+  /*margin-right: 500px;*/
+}
+
+.LineRight {
+  float:right;
+  margin-top: 12px;
+}
+
+/* 项目配置页面table样式 */
+
+.shortInput {
+  width: 70px;
+}
+.shortInput2 {
+  width: 120px;
+}
+.shortTd {
+  width: 50px;
+}
+.HostWidth {
+  width: 130px;
+}
+
+

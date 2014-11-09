@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - Redis管理</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 删除主机确认函数 -->
+<script type="text/javascript" src="/static/js/hosts.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='hosts',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>Redis主机管理</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+		  <table width=100%>
+		  <tr>
+			  <td><h3>Redis Instances</h3></td>
+			  <td>
+			  按主机显示：<select name="show4host" id="show4host" class="">
+                      <option value=""  selected="selected">所有主机</option>
+                      <option value="1">192.168.1.101</option>
+                 </select>　　　
+        按项目归属显示：<select name="show4project" id="show4project" class="">
+                      <option value=""  selected="selected">所有项目</option>
+                      <option value="1">互娱游戏</option>
+                 </select>　　　
+        显示行数：<select name="showline" id="showline" class="">
+                      <option value="all"  selected="selected">所有行</option>
+                      <option value="line10">10 行</option>
+                      <option value="line20">20 行</option>
+                      <option value="line50">50 行</option>
+                      <option value="line100">100行</option>
+                      <option value="line200">200行</option>
+                      <option value="line500">500行</option>
+                  </select>
+			  </td>
+              <td align='right'><a href="/hosts/redis/add" class="btn"><span class="icon icon-add">&nbsp;</span>添加实例</a></td>
+          </tr>
+          </table>					
+					<table class="datalist" id="redisList">
+						<thead>
+						  <tr>
+							<th>序号</th>
+							<th>IP地址</th>
+							<th>端口</th>
+							<th>容量</th>
+							<th>配置文件</th>							
+							<th>主从角色</th>
+							<th>同步主机</th>
+							<th>业务归属</th>
+							<th>备注信息</th>
+							<th>修改时间</th>
+							<th>运行状态</th>
+							<th>操作管理</th>
+					    </tr>
+						</thead>
+						<tbody>
+						<%
+						ip0 = '0'
+						x = 1
+						sty = ['dataline1','dataline2']
+						%>
+						% for i in redisData:
+                                                   <%
+                                                       # 不同主机颜色判定
+                                                       if ip0 == '0' or str(i.ip) == ip0:
+					                   style = sty[0]
+					               else:
+					                   style = sty[1]
+					                   sty = [sty[1],sty[0]]
+					               # 状态展示
+					               if str(i.status) == 'yes':
+					                   status = '正常'
+					                   stColor = 'ok'
+					               else:
+					                   status = '停用'
+					                   stColor = 'unnormal'
+					               # 主从关系展示
+					               if i.master == None and i.slave == None:
+					                   roleStr = 'Master'
+					                   syncStr = 'No'
+					               elif i.master != i.slave and i.master == None:
+                                                           roleStr = 'Master'
+					                   syncStr = 'Slave=' + str(i.slave)
+					               elif i.master != i.slave and i.slave == None:
+					                   roleStr = 'Slave'
+					                   syncStr = 'Master=' + str(i.master)
+					               else:
+					                   roleStr = 'Unknown'
+					                   syncStr = 'Unknown'   
+					           %>
+						<tr class="${style}">
+						       <td class="point" title="ID: ${i.id}">${x}</td>
+						       <td class="point" title="访问域名：redis.${i.ip}">${i.ip}</td>
+						       <td>${i.port}</td>
+						       <td class="point" title="已使用： 1.2G&#10;使用率： 58%">${i.size}</td>
+	  					       <td>${i.conf}</td>
+						       <td>${roleStr}</td>
+						       <td>${syncStr}</td>
+						       <td>互娱游戏</td>
+						       <td>${i.comment}</td>
+						       <td class="point" title="实例名：${i.ip}:${i.port}&#10;修改者：${i.editor}&#10;创建者：${i.creator}&#10;创建时间：${i.cdate}">${i.mdate}</td>
+						       <td class="${stColor}">${status}</td>
+						       <td><a href="/hosts/redis/edit?id=${i.id}">详情</a> | <a href="/hosts/redis/del?id=${i.id}" onClick="return isDel()">删除</a> | <a href="/hosts/redis/edit?id=${i.id}">编辑</a> | <a href="/hosts/redis/admin?id=${i.id}">管理</a></td>
+						</tr>
+						<%
+						ip0 = str(i.ip)
+						x += 1
+						%>
+						% endfor
+						</tbody>
+						<tfoot>
+							<tr>
+							<th>ID</th>
+							<th>IP地址</th>
+							<th>端口</th>
+							<th>容量</th>
+							<th>配置文件</th>
+							<th>主从角色</th>
+							<th>同步主机</th>
+							<th>业务归属</th>
+							<th>备注信息</th>
+							<th>修改时间</th>
+							<th>运行状态</th>
+							<th>操作管理</th>
+							</tr>
+						</tfoot>
+					</table>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

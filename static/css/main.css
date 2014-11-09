@@ -1,0 +1,764 @@
+@charset "UTF-8";
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+}
+
+article,aside,canvas,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section,summary { 
+    display:block;
+}
+
+nav ul {
+    list-style:none;
+}
+
+hr {
+    display:block;
+    height:1px;
+    border:0;   
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+/* Base
+---------------------------------------------------------------------*/
+
+body {
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	line-height:1.5;
+	font-size:12px;
+	background-color:#F2F2F2;
+	color:#666;
+	margin:0 auto;
+}
+a {
+	outline:none;
+}
+h1,h2,h3,h4,h5,h6 {
+	color:#4D5762;
+	position:relative;
+	word-spacing:-0.1em;
+}
+h4,h5,h6 {
+	font-weight:bold;
+}
+h1,h2 {
+	line-height:28px;
+	margin-bottom:18px;
+}
+h1,h2,h3,h4,h5 {
+	margin-top:18px;
+}
+h3,h4,h5,h6 {
+	line-height:18px;
+	margin-bottom:10px;
+}
+h1 {
+	font-size:28px;
+}
+h2 {
+	font-size:21px;
+}
+h3 {
+	font-size:18px;
+}
+h4 {
+	font-size:16px;
+}
+h5 {
+	font-size:14px;
+}
+h6 {
+	font-size:12px;
+}
+
+hr {
+	border:none;
+	background:#ddd;
+	width:100%;
+}
+ul,ol {
+	padding-left:1.5em; /* Good browsers style ul elements like this https://developer.mozilla.org/en/Consistent%5FList%5FIndentation */
+}
+ul {
+	list-style:disc outside;
+}
+ol {
+	list-style:decimal outside;
+}
+ol ol li {
+	list-style-type:lower-alpha;
+}
+ul,ol,dl,dialog {
+	margin-top:1em;
+	margin-bottom:1em;
+}
+li ul,li ol,ul ul,ol ol,dl dd {
+	margin-top:0;
+	margin-bottom:0;
+	margin-left:0;
+}
+button {
+	cursor:pointer;
+}
+
+/* this totally confuses IE7 with IE8.js included ?!
+table {
+	font: inherit;
+} 
+*/
+
+/* html 5 specific */
+article,aside,header,hgroup,nav,section,footer {
+	float:left;
+	display:block;
+}
+figure {
+	display: block;
+}
+
+/* Wrappers & headers
+---------------------------------------------------------------------*/
+
+.wrapper, .wrapper-login {
+	margin:0 auto;
+	text-align:left;
+	width: 1100px; /* 整体宽度 */
+	position:relative;
+}
+.wrapper-login {
+	width: 360px;
+}
+
+header#top {
+	background-color: #282828;
+	width:100%;
+	background:-webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.2, rgb(39,38,34)),
+		color-stop(0.8, rgb(50,50,50))
+	);
+	background: -moz-linear-gradient(
+		center bottom,
+		rgb(39,38,34) 20%,
+		rgb(50,50,50) 80%
+	);
+}
+
+header#top aside {
+	float:right;
+	color:#999;
+	margin-top:12px;
+	font-size:90%
+}
+header#top aside a{
+	color:#2A7AD2;
+	padding:0;
+	text-decoration:none;
+}
+
+/* Top navigation
+---------------------------------------------------------------------*/
+
+#topnav {
+	color:#999;
+	padding:6px 0 6px 10px;
+	position:absolute;
+	right:0;
+	top:0;
+	white-space:nowrap;
+	font-size:12px;
+	text-align:right;
+}
+#topnav span {
+	color:#444;
+}
+#topnav a {
+	color:#2A7AD2;
+	padding:0;
+	text-decoration:none;
+}
+#topnav a.high {
+	color:#FFC806;
+	text-decoration:none;
+}
+#topnav a:hover, header#top aside a:hover,
+#topnav a:focus, header#top aside a:focus,
+#topnav a:active, header#top aside a:active {
+	color:#fff;
+	text-decoration:none;
+}
+#topnav small {
+	color:#666;
+	font-size:11px;
+	text-align:right;
+}
+#topnav img.avatar {
+	background:#fff;
+	float:right;
+	margin:5px 0 0 8px;
+	padding:4px;
+}
+
+/* Main menu
+---------------------------------------------------------------------*/
+
+.sf-menu,.sf-menu * {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.sf-menu {
+	line-height:1.0;
+}
+.sf-menu ul {
+	position:absolute;
+	top:-999em;
+	width:12em; /* left offset of submenus need to match (see below) */
+}
+.sf-menu ul li {
+	width:100%;
+}
+.sf-menu li:hover {
+	visibility:inherit; /* fixes IE7 'sticky bug' */
+}
+.sf-menu li {
+	float:left;
+	position:relative;
+}
+.sf-menu a {
+	display:block;
+	position: relative;
+}
+.sf-menu li:hover ul,.sf-menu li.sfHover ul {
+	left:0;
+	top:2.5em; /* match top ul list item height */
+	z-index:99;
+}
+ul.sf-menu li:hover li ul,ul.sf-menu li.sfHover li ul {
+	top: -999em;
+}
+ul.sf-menu li li:hover ul,ul.sf-menu li li.sfHover ul {
+	left:12em; /* match ul width */
+	top:0;
+}
+ul.sf-menu li li:hover li ul,ul.sf-menu li li.sfHover li ul {
+	top: -999em;
+}
+ul.sf-menu li li li:hover ul,ul.sf-menu li li li.sfHover ul {
+	left:12em; /* match ul width */
+	top:0;
+}
+
+/*** 导航菜单样式 ***/
+
+.sf-menu {
+	float:left;
+	font: 12px Arial;
+}
+.sf-menu a {
+	padding:.75em 1em;
+	text-decoration:none;
+}
+.sf-menu ul a {
+	border-bottom: 1px solid #333;
+}
+.sf-menu a,.sf-menu a:visited {
+	/* visited pseudo selector so IE6 applies text colour*/
+	color:#eee;
+}
+.sf-menu li {
+	background:#444;
+	margin-right:2px;
+}
+.sf-menu>li {
+	border-top-right-radius:4px;
+	border-top-left-radius:4px;
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+}
+.sf-menu li li {
+	background:#444;
+}
+.sf-menu li li li {
+	background:#444;
+}
+.sf-menu li:hover,.sf-menu li.sfHover,.sf-menu a:focus,.sf-menu a:hover,.sf-menu a:active {
+	background:#555;
+	outline:0;
+}
+.sf-menu>li:hover,.sf-menu>li.sfHover,.sf-menu a:focus,.sf-menu a:hover,.sf-menu a:active {
+	border-top-right-radius:4px;
+	border-top-left-radius:4px;
+	-moz-border-radius-topleft:4px;
+	-webkit-border-top-left-radius:4px;
+	-moz-border-radius-topright:4px;
+	-webkit-border-top-right-radius:4px;
+}
+.sf-menu li.current {
+	background: #266DBB;
+}
+
+/* 二级菜单宽度，没有生效，待改进 */
+.secondMenu li {
+  width:100px;
+}
+
+/*** arrows **/
+.sf-menu a.sf-with-ul {
+	padding-right:2.25em;
+	min-width: 1px; /* trigger IE7 hasLayout so spans position accurately */
+}
+.sf-sub-indicator {
+	position:absolute;
+	display:block;
+	right:.75em;
+	top:1.05em; /* IE6 only */
+	width:10px;
+	height:10px;
+	text-indent:-999em;
+	overflow:hidden;
+	background:url('../images/arrows-ffffff.png') no-repeat -10px -100px; /* 8-bit indexed alpha png. IE6 gets solid image only */
+}
+a>.sf-sub-indicator { /* give all except IE6 the correct values */
+	top:.8em;
+	background-position:0 -100px; /* use translucent arrow for modern browsers*/
+}
+/* apply hovers to modern browsers */
+a:focus>.sf-sub-indicator,a:hover>.sf-sub-indicator,a:active>.sf-sub-indicator,li:hover>a>.sf-sub-indicator,li.sfHover>a>.sf-sub-indicator {
+	background-position: -10px -100px; /* arrow hovers for modern browsers*/
+}
+/* point right for anchors in subs */
+.sf-menu ul .sf-sub-indicator {
+	background-position:-10px 0;
+}
+.sf-menu ul a>.sf-sub-indicator {
+	background-position: 0 0;
+}
+/* apply hovers to modern browsers */
+.sf-menu ul a:focus>.sf-sub-indicator,.sf-menu ul a:hover>.sf-sub-indicator,.sf-menu ul a:active>.sf-sub-indicator,.sf-menu ul li:hover>a>.sf-sub-indicator,.sf-menu ul li.sfHover>a>.sf-sub-indicator {
+	background-position: -10px 0;
+	/* arrow hovers for modern browsers*/
+}
+/*** shadows for all but IE6 ***/
+.sf-shadow ul {
+	background:url('../images/shadow.png') no-repeat bottom right;
+	padding:0 8px 9px 0;
+	-moz-border-radius-bottomleft:17px;
+	-moz-border-radius-topright:17px;
+	-webkit-border-top-right-radius:17px;
+	-webkit-border-bottom-left-radius:17px;
+}
+.sf-shadow ul.sf-shadow-off {
+	background: transparent;
+}
+
+/* Page title
+---------------------------------------------------------------------*/
+
+#title {
+	color:#FFF;
+	font:bold 2.4em/26px 'Trebuchet MS',Trebuchet,Arial,sans-serif;
+	letter-spacing:-0.02em;
+	padding:20px 0 22px;
+	text-shadow:1px 1px 3px #111;
+}
+#title span {
+	color: #FFC806; 
+}
+
+#pagetitle {
+	background-color:#5D9ADF;
+	border-top:4px solid #266DBB;
+	border-bottom:1px solid #2A7AD2;
+	float:left;
+	width:100%;
+	background: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.2, rgb(80,146,220)),
+	color-stop(0.8, rgb(107,163,226))
+	);
+	background: -moz-linear-gradient(
+	center bottom,
+	rgb(80,146,220) 20%,
+	rgb(107,163,226) 80%
+	);
+}
+#pagetitle h1 {
+	color:#fff;
+	font-size:1.6em;
+	padding:12px 0;
+	text-shadow:0 -1px 1px #2A7AD2;
+	margin:0;
+	top:0;
+	line-height:1.2em;
+	float:left;
+}
+#pagetitle h1 span {
+	color:#C4E3FF;
+}
+#pagetitle input {
+	border:2px solid #5D9ADF;
+	color:#666;
+	float:right;
+	line-height:18px;
+	margin:10px 0 0;
+	padding:4px 24px 4px 4px;
+	vertical-align:middle;
+	width:202px;
+	background:#fff url("../images/search.gif") no-repeat 99% 56%;
+	-moz-box-shadow:0 0;
+	-webkit-box-shadow:0 0;
+	box-shadow:0 0;
+}
+#pagetitle input:focus {
+	border:2px solid #266DBB;
+	-webkit-focus-ring-color: none;
+}
+
+#page {
+	float:left;
+	width:100%;
+	background-color:#FFF;
+}
+/* 页面超级链接
+#page a {
+	color: #329ECC;
+	text-decoration:none;
+	border-bottom:1px solid #A1CFD4;
+}
+#page a:hover, #page a:focus, #page a:active {
+	background-color:#E2EFFF;
+	border-bottom:1px solid #329ECC;
+}
+*/
+#page a{
+    text-decoration:none;
+}
+
+#page .subtitle {
+	text-transform:uppercase;
+	color:#93BB3A;
+	font-size:9px;
+	font-family: Tahoma, Arial, sans-serif;
+}
+
+/* Footers
+---------------------------------------------------------------------*/
+
+footer#bottom {
+	background-color:#F2F2F2;
+	border-top:4px solid #D9D9D9;
+	color:#999;
+	float:left;
+	font-size:11px;
+	width:100%;
+	background:-webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.2, rgb(242,242,242)),
+		color-stop(0.8, rgb(254,254,254))
+	);
+	background: -moz-linear-gradient(
+		center bottom,
+		rgb(242,242,242) 20%,
+		rgb(254,254,254) 80%
+	);
+	padding-bottom:2em;
+}
+footer#bottom nav{
+	float:none;
+	text-align: center;
+	padding-top:20px;
+}
+footer#bottom a {
+	color:#999;
+	margin:0 4px;
+	text-decoration:none;
+	white-space:nowrap;
+	border-bottom:1px solid #ccc;
+	line-height:1.2em;
+}
+footer#bottom a:hover, footer#bottom a:active, footer#bottom a:focus {
+	color:#666;
+	border-bottom:1px solid #999;
+	text-decoration:none;
+}
+footer#bottom p{
+	clear:both;
+	text-align:center;
+	margin-bottom:24px;
+	padding-top:12px;
+	text-shadow:1px 1px 0 #fff;
+}
+
+footer#animated {
+	background:#222;
+	bottom:0;
+	padding:10px 0 8px;
+	position:fixed;
+	width:100%;
+	opacity:0;
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+}
+footer#animated ul {
+	list-style:none outside none;
+	margin:0 auto;
+	text-align:center;
+}
+footer#animated ul li {
+	color:#fff;
+	display:inline;
+	padding:0 10px;
+	text-shadow:1px 1px 3px #000;
+}
+footer#animated a {
+	color:#aaa;
+	text-decoration:none;
+}
+footer#animated a:hover, footer#animated a:focus, footer#animated a:active {
+	color:#fff;
+	text-decoration:none;
+}
+
+/* Top 返回顶部样式
+---------------------------------------------------------------------*/
+
+a#totop {
+	background:#000;
+	bottom:2px;
+	display:block;
+	font-size:12px;
+	opacity:0.9;
+	-khtml-opacity: .9;
+	-moz-opacity: 0.9;
+	padding:3px 6px;
+	position:fixed;
+	right:2px;
+	color:#fff;
+	text-decoration:none;
+	cursor:pointer;
+}
+a#totop:hover, a#totop:focus, a#totop:active{
+	color:#fff;
+	background:#2A7AD2;
+	text-decoration:none;
+}
+
+/* Pagination
+---------------------------------------------------------------------*/
+
+.pagination  a {
+	padding:2px 6px;
+	border:0 none !important;
+}
+.pagination a.pagination-active, .pagination a.pagination-active:hover {
+	background-color:#266DBB !important;
+	color:#fff !important;
+}
+
+/* Nyro popup window
+---------------------------------------------------------------------*/
+
+div#nyroModalFull {
+	font-size: 12px;
+	color: #777;
+}
+div#nyroModalFull div#nyroModalLoading {
+	border: 4px solid #777;
+	width: 150px;
+	height: 150px;
+	text-indent: -9999em;
+	background: #fff url(../images/nyro/ajaxLoader.gif) no-repeat;
+	background-position: center;
+}
+div#nyroModalFull div#nyroModalLoading.error {
+	border: 4px solid #f66;
+	line-height: 20px;
+	padding: 20px;
+	width: 300px;
+	height: 100px;
+	text-indent: 0;
+	background: #fff;
+}
+div#nyroModalFull div#nyroModalWrapper {
+	background: #fff;
+	border: 4px solid #777;
+}
+div#nyroModalFull div#nyroModalWrapper a#closeBut {
+	position: absolute;
+	display: block;
+	top: -13px;
+	right: -13px;
+	width: 12px;
+	height: 12px;
+	text-indent: -9999em;
+	background: url(../images/nyro/close.gif) no-repeat;
+	outline: 0;
+}
+div#nyroModalFull div#nyroModalWrapper h1#nyroModalTitle {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: -22px;
+	left: 5px;
+	font-size: 12px;
+	color: #ddd;
+}
+div#nyroModalFull div#nyroModalWrapper div#nyroModalContent {
+	overflow: auto;
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapper div#nyroModalContent {
+	padding: 5px;
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapperImg div#nyroModalContent {
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapperImg div#nyroModalContent img {
+	vertical-align: baseline;
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapperImg div#nyroModalContent div {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: black;
+	padding: 10px;
+	margin: 10px;
+	border: 1px white dotted;
+	overflow: hidden;
+	opacity: 0.2;
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapperImg div#nyroModalContent div:hover {
+	opacity: 0.5;
+	cursor: help;
+}
+div#nyroModalFull div#nyroModalWrapper a.nyroModalPrev, div#nyroModalFull div#nyroModalWrapper a.nyroModalNext {
+	z-index: 105;
+	outline: none;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 40%;
+	cursor: pointer;
+	text-indent: -9999em;
+	background: left 20% no-repeat;
+	background-image: url(data-3Aimage/gif;base64,AAAA); /* Trick IE6 */
+}
+div#nyroModalFull div#nyroModalWrapper div.wrapperSwf a.nyroModalPrev, div#nyroModalFull div#nyroModalWrapper div.wrapperSwf a.nyroModalNext, div#nyroModalFull div#nyroModalWrapper div.wrapper a.nyroModalPrev, div#nyroModalFull div#nyroModalWrapper div.wrapper a.nyroModalNext {
+	height: 60%;
+	width: 20%;
+}
+div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalPrev {
+	left: 0;
+}
+div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalPrev:hover {
+	background-image: url(../images/nyro/prev.gif);
+}
+div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalNext {
+	right: 0;
+	background-position: right 20%;
+}
+div#nyroModalFull div#nyroModalWrapper div#nyroModalContent a.nyroModalNext:hover {
+	background-image: url(../images/nyro/next.gif);
+}
+
+/* 按钮样式
+---------------------------------------------------------------------*/
+
+.btn {
+	display: inline-block;
+	padding: 5px 10px;
+	color: #777 !important;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 12px;
+	font-family: SimSun;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	text-shadow: 0 1px 1px rgba(255,255,255,0.9);
+	position: relative;
+	cursor: pointer;
+	border:1px solid #ccc !important;
+	background:#fff url("../images/btn-overlay.png") repeat-x !important;
+}
+.btn:hover, .btn:focus, .btn:active {
+	outline:medium none;
+	border:1px solid #329ECC !important;
+	opacity:0.9;
+	-khtml-opacity: .9;
+	-moz-opacity: 0.9;
+	-moz-box-shadow:0 0 5px rgba(82, 168, 236, 0.5);
+	-webkit-box-shadow: 0 0 5px rgba(82, 168, 236, 0.5);
+	box-shadow: 0 0 5px rgba(82, 168, 236, 0.5);
+}
+
+.icon {
+	display: block;
+	text-indent: -99999px;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	float:left;
+	margin-right: 4px;
+}
+.icon-add {
+	background:url("../images/add.png") no-repeat;
+}
+.icon-ok {
+	background:url("../images/accept.png") no-repeat;
+}
+.icon-reset {
+	background:url("../images/reset.gif") no-repeat;
+}
+.icon-key {
+	background:url("../images/key.png") no-repeat;
+}
+.icon-info {
+	background:url("../images/information.png") no-repeat;
+}
+.icon-refresh {
+	background:url("../images/refresh.png") no-repeat;
+}
+
+/*  缩进 */
+.in2 {
+  text-indent:2em;
+}
+.in4 {
+  text-indent:4em;
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 网络流量监控</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- jQuery with plugins  -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN :
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+<!-- 监控数据展示   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+注意：这里1.8.2与1.4.2在一起不兼容，有冲突，使用1.7.1才兼容
+升级1.8.2，貌似正常
+-->
+<script type="text/javascript" src="/static/js/highcharts/highcharts.js"></script>
+<!--<script type="text/javascript" src="/static/js/highcharts/modules/exporting.js"></script> -->
+<script type="text/javascript">
+$(function () {
+    $('#m_Bandwidth_display').highcharts({
+        credits: {
+            enabled: true,
+            text: 'Luxiaok.com',
+            href: 'http://cto.luxiaok.com'
+        },
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Network Bandwidth - 172.16.8.254'
+        },
+        subtitle: {
+            text: 'Interface： eth0'
+        },
+        xAxis: {
+            tickInterval: 2,
+            categories: ['00:00:00', '00:30:00', '01:00:00', '01:30:00', '02:00:00', '02:30:00', '03:00:00', '03:30:00', '04:00:00', '04:30:00', '05:00:00', '05:30:00', '06:00:00',
+            '06:30:00',  '07:00:00', '07:30:00', '08:00:00', '08:30:00', '09:00:00', '09:30:00', '10:00:00', '10:30:00', '11:00:00', '11:30:00', '12:00:00', '12:30:00', '13:00:00', 
+            '13:30:00',  '14:00:00', '14:30:00', '15:00:00', '15:30:00', '16:00:00', '16:30:00', '17:00:00', '17:30:00', '18:00:00', '18:30:00', '19:00:00', '19:30:00', '20:00:00', 
+            '20:30:00',  '21:00:00', '21:30:00', '22:00:00', '22:30:00', '23:00:00', '23:30:00'],
+             labels:{
+            //style: {
+            //         width: 'auto',
+            //         height: 'auto'
+            //    },
+            //x:-45,//调节x偏移
+            //y:-35,//调节y偏移
+            rotation: -25, //调节倾斜角度偏移
+            //align: 'right'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Bandwidth (MB)'
+            },
+            labels: {
+                formatter: function() {
+                    return this.value +' MB';
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '{series.name} <b>{point.y:,.0f} MB</b>'
+        }, 
+       plotOptions: {
+            area: {
+                //pointStart: 0,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 1,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Incoming',
+            data: [4.618, 6.444, 9.822, 15.468, 20.434, 24.126,27.387, 29.459, 31.056, 31.982,
+            		32.040, 31.233, 29.224, 27.342, 26.662, 27.912, 28.999, 28.965, 27.826, 25.579,
+            		25.722, 24.826, 24.605,24.304, 23.464, 23.708, 24.099, 24.357, 24.237, 24.401, 24.344,
+            		23.586,22.380, 21.004, 17.287, 14.747, 13.076, 12.555, 12.144, 11.009, 10.950,
+                10.871, 10.824, 10.577, 10.527, 10.475, 10.421, 10.358
+            ]
+        }, {
+            name: 'Outgoing',
+            data: [2.500, 5.000, 1.060, 1.605, 2.471, 3.322,4.238, 5.221, 6.129,
+            	7.089, 8.339, 9.399, 10.538, 11.643, 13.092, 14.478,15.915, 17.385, 19.055, 21.205,
+            	23.044, 25.393, 27.935, 30.062, 32.049,33.952, 35.804, 37.431, 39.197, 45, 43,
+            	41, 39, 37,35, 33, 31, 29, 27, 25, 24, 23,
+            	22,21, 20, 19, 18, 18
+            ]
+        }]
+    });
+});  
+</script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='monitor',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>网络监控平台</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+    <div id="m_Bandwidth_display" style="min-width: 310px; height: 400px; margin: 0 auto; width: 1100px"></div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

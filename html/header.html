@@ -1,0 +1,118 @@
+<%page args="curM,ShowName,uid"/>
+	<header id="top">
+		<div class="wrapper">
+			<!-- Title/Logo - can use text instead of image -->
+			<div id="title"><img src="/static/images/logo.png" alt="SaltStack Admin" title="SaltStack Admin Beta&#10;Powered by Luxiaok" style="cursor:pointer" /><!--<span>Administry</span> demo--></div>
+			<!-- Top navigation -->
+			<div id="topnav">
+				<a href="/users/edit?id=${uid}"><img class="avatar" src="/static/images/user_32.png" alt="${ShowName}" title="${ShowName}"/></a>
+				欢迎您，<b>${ShowName}</b>！
+				<span>|</span> <a href="/users/edit?id=${uid}">设置</a>
+				<span>|</span> <a href="/logout">退出</a><br />
+				<small>您有<a href="#" class="high"><b>3</b>条信息</a></small>
+			</div>
+			<!-- End of Top navigation -->
+			
+			<!-- Main navigation -->
+<%
+# 高亮当前导航菜单的判断
+def curMenu(curM,curName):
+    if curM == curName:
+        return 'class="current"'
+    else:
+        return 'class=""'
+%>
+<nav id="menu">	
+    <ul class="sf-menu">
+        <li ${curMenu(curM,'dashboard')}><a href="/dashboard">控制中心</a></li>
+        <li ${curMenu(curM,'hosts')}><a href="/hosts">主机</a>
+            <ul>
+                <li class="secondMenu"><a href="/hosts">主机管理</a></li>
+                <li class="secondMenu"><a href="/hosts/add">添加主机</a></li>
+	              <li class="secondMenu"><a href="/hosts/redis">Redis管理</a>
+	                 <ul>
+	                    <li><a href="/hosts/redis">Redis实例管理</a></li>
+	                    <li><a href="/hosts/redis/add">添加Redis实例</a></li>
+	                 </ul>
+	              </li>
+		            <li class="secondMenu"><a href="/hosts/mysql">MySQL管理</a>
+	                 <ul>
+	                    <li><a href="/hosts/mysql">MySQL实例管理</a></li>
+	                    <li><a href="/hosts/mysql/add">添加MySQL实例</a></li>
+	                 </ul>
+	              </li> 
+            </ul>
+        </li> 
+        <li ${curMenu(curM,'project')}><a href="/project">项目</a>
+            <ul>
+                <li><a href="/project">项目管理</a></li>
+                <li><a href="/project/add">添加项目</a></li>
+            </ul>
+		    </li>		
+        <li ${curMenu(curM,'users')}><a href="/users">用户</a>
+            <ul>
+                <li><a href="/users">用户管理</a></li>
+                <li><a href="/users/add">添加用户</a></li>
+            </ul>
+        </li>
+        <li ${curMenu(curM,'admin')}><a href="/admin/config">管理</a>
+            <ul>
+                <li><a href="/admin/system">系统管理</a></li>
+                <li><a href="/admin/options">选项管理</a></li>
+                <li><a href="/hosts">资产管理</a></li>
+            </ul>
+        </li>
+        <li  ${curMenu(curM,'monitor')}><a href="/monitor/redis">监控</a>
+            <ul>
+                <li><a href="/monitor/redis">Redis监控</a></li>
+                <li><a href="/monitor/mysql">MySQL监控</a></li>
+                <li><a href="/monitor/traffic">网络流量</a></li>
+                <li><a href="#">Zabbix API</a></li>
+            </ul>
+        </li>
+        <li ${curMenu(curM,'salt')}><a href="/salt">SaltStack</a>
+            <ul>
+                <li><a href="/salt/admin">主机管理</a>
+                    <ul>
+                        <li><a href="/salt/service">服务管理</a></li>
+                        <li><a href="/salt/user">用户管理</a></li>
+                        <li><a href="/salt/pkg">软件管理</a></li>
+                        <li><a href="/salt/system">系统管理</a></li>
+                    </ul>
+                </li>
+                <li><a href="/salt/status">实时状态</a></li>
+                <li><a href="/salt/cmd">命令下发</a></li>
+                <li><a href="/salt/config">配置管理</a></li>
+                <li><a href="/salt/key">认证管理</a></li>
+                <li><a href="/salt/file">文件分发</a></li>
+                <li><a href="/salt/release">发布管理</a></li>
+            </ul>
+        </li>
+        <li ${curMenu(curM,'report')}><a href="/report/fault">报告</a>
+            <ul>
+                <li><a href="/report/fault">故障上报</a></li>
+                <li><a href="/report/topo">拓扑文档</a></li>
+                <li><a href="/report/wiki">项目维基</a></li>
+                <li><a href="/report/norm">规范文档</a></li>      
+            </ul>
+        </li>
+        <li ${curMenu(curM,'cloud')}><a href="#">企业云</a></li>
+        <li ${curMenu(curM,'test')}><a href="/test">测试页面</a></li>
+    </ul>
+</nav>
+
+			<!-- End of Main navigation -->
+			<!-- Aside links -->
+			<aside>
+            <%!
+            import datetime
+            import time
+            NowDate = time.strftime("%Y年%m月%d日",time.localtime(time.time()))
+            WeekID = time.strftime("%w",time.localtime(time.time()))
+            wid = int(WeekID)
+            Week = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六']
+            %>
+            <div style=font-size:12px><b>${NowDate} ${Week[wid]}</b></div></aside>
+			<!-- End of Aside links -->
+		</div>
+	</header>

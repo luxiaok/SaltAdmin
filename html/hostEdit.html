@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack Admin - 主机管理 - 主机编辑</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!-- 用户列表css样式 --> 
+<link rel="stylesheet" href="/static/css/tables.css" type="text/css" />
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!--
+Could be loaded remotely from Google CDN : 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+-->
+<!-- Superfish Navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- 新增主机 -->
+<script type="text/javascript" src="/static/js/hosts.js"></script>
+<!-- 顶部导航和底部隐藏的导航的特效输出 -->
+<script type="text/javascript" src="/static/js/nav.show.menu.js"></script>
+</head>
+<body>
+	<!-- Header -->
+	<%include file="header.html" args="curM='hosts',ShowName=ShowName,uid=uid" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>编辑主机：${HostData['hostname']}</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+	      <div>
+<form name="hostForm" id="hostForm" action="/hosts/edit">
+<table class="maintable">
+  <tr>
+      <input type="text" name="id" id="id" class="maininput" value="${HostData['id']}" style="display:none"/>
+      <td class="textLeft">主机名</td>
+      <td class="inputRight"><input type="text" name="hostname" id="hostname" class="maininput" value="${HostData['hostname']}"/></td>
+      <td class="textLeft">待定功能</td>
+      <td class="inputRight"><input type="text" name="dpt" class="maininput" /></td>
+  </tr>
+  <tr>
+      <td class="textLeft">域名</td>
+      <td class="inputRight"><input type="text" name="domain" class="maininput" /></td>
+      <td class="textLeft">型号</td>
+      <td class="inputRight"><select name="model" id="model" class="selectmenu">
+      % for x in SD['model']:
+          % if str(HostData['model']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">角色</td>
+      <td class="inputRight"><select name="role" id="role" class="selectmenu">
+      % for x in SD['role']:
+          % if str(HostData['role']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+      <td class="textLeft">CPU</td>
+     <td class="inputRight"><select name="cpu" id="cpu" class="selectmenu">
+      % for x in SD['cpu']:
+          % if str(HostData['cpu']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+     </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">操作系统</td>
+      <td class="inputRight"><select name="os" id="os" class="selectmenu">
+      % for x in SD['os']:
+          % if str(HostData['os']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+     </select></td>
+     <td class="textLeft">内存</td>
+     <td class="inputRight"><select name="mem" id="mem" class="selectmenu">
+      % for x in SD['mem']:
+          % if str(HostData['mem']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">内网IP1</td>
+      <td class="inputRight">
+      <select name="iface0" id="iface0">
+        <option value="eth0" selected="selected">eth0</option>
+        <option value="eth1">eth1</option>
+        <option value="eth2">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="priip1" id="priip1" value="${HostData['priip1']}"/></td>
+      <td class="textLeft">硬盘</td>
+      <td class="inputRight"><select name="hdd" id="hdd" class="selectmenu">
+      % for x in SD['hdd']:
+          % if str(HostData['hdd']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">公网IP1</td>
+      <td class="inputRight">
+      <select name="iface1" id="iface1">
+        <option value="eth0">eth0</option>
+        <option value="eth1" selected="selected">eth1</option>
+        <option value="eth2">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="pubip1" id="pubip1" value="${HostData['pubip1']}"/></td>
+      <td class="textLeft">IDC</td>
+      <td class="inputRight"><select name="idc" id="idc" class="selectmenu">
+      % for x in SD['idc']:
+          % if str(HostData['idc']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">内网IP2</td>
+      <td class="inputRight">
+      <select name="iface2" id="iface2">
+        <option value="eth0">eth0</option>
+        <option value="eth1">eth1</option>
+        <option value="eth2" selected="selected">eth2</option>
+        <option value="eth3">eth3</option>
+        <option value="em0">em0</option>
+        <option value="em1">em1</option>
+        <option value="em2">em2</option>
+        <option value="em3">em3</option>
+      </select>
+      <input type="text" name="priip2" value="${HostData['priip2']}"/></td>
+      <td class="textLeft">机柜编码</td>
+      <td class="inputRight"><select name="idctag" id="idctag" class="selectmenu">
+      % for x in SD['idctag']:
+          % if str(HostData['idctag']) == str(x['id']):
+          <option value="${x['id']}" selected="selected">${x['value']}</option>
+          % else:
+          <option value="${x['id']}">${x['value']}</option>
+          % endif
+      % endfor
+      </select></td>
+  </tr>
+  <tr>
+      <td class="textLeft">公网IP2</td>
+      <td class="inputRight">
+      <select name="iface3" id="iface3">
+          <option value="eth0">eth0</option>
+          <option value="eth1">eth1</option>
+          <option value="eth2">eth2</option>
+          <option value="eth3" selected="selected">eth3</option>
+          <option value="em0">em0</option>
+          <option value="em1">em1</option>
+          <option value="em2">em2</option>
+          <option value="em3">em3</option>
+       </select>
+      <input type="text" name="pubip2" value="${HostData['pubip2']}"/></td>
+      <td class="textLeft">服务器标签</td>
+      <td class="inputRight"><input type="text" name="stag" class="maininput" value="${HostData['stag']}"/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">远程管理IP</td>
+      <td class="inputRight"><input type="text" name="adminip" class="maininput" value="${HostData['adminip']}" /></td>
+      <td class="textLeft">资产编码</td>
+      <td class="inputRight"><input type="text" name="rnum" class="maininput" value="${HostData['rnum']}" /></td>
+  </tr>
+  <tr>
+      <td class="textLeft">类型</td>
+      <td class="inputRight"><input type="text" name="type" class="maininput" value="${HostData['type']}" /></td>
+      <td class="textLeft">服务编码</td>
+      <td class="inputRight"><input type="text" name="snum" class="maininput" value="${HostData['snum']}"/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">状态</td>
+      <td class="inputRight"><select name="status" id="status" class="selectmenu">
+      <option value="OnLine" selected="selected">在线</option>
+      <option value="Offline">离线</option>
+      <option value="Unknown">未知</option>
+      <option value="Other">其他</option>
+      </select></td>
+      <td class="textLeft">入库日期</td>
+      <td class="inputRight"><input type="text" name="storagedate" class="maininput" value="${HostData['storagedate']}""/></td>
+  </tr>
+  <tr>
+      <td class="textLeft">备注</td>
+      <td class="inputRight"><input type="text" name="comment" class="maininput" value="${HostData['comment']}"/></td>
+      <td class="textLeft">上架日期</td>
+      <td class="inputRight"><input type="text" name="startdate" class="maininput" value="${HostData['startdate']}""/></td>
+  </tr>
+</table>
+    <div class="submitArea">
+		<div class="reset"><a href="javascript:void(0)" onClick="resetForm()" class="btn"><span class="icon icon-reset">&nbsp;</span>重 置</a></div>
+		<div class="submit"><a href="javascript:void(0)" onClick="submitForm('hostForm')" class="btn"><span class="icon icon-ok">&nbsp;</span>保 存</a></div>
+	</div>
+</form>
+	      </div>
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>

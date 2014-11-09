@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<title>SaltStack - 管理中心</title>
+<meta name="description" content="Luxiaok" />
+<meta name="keywords" content="Luxiaok" />
+<!-- We need to emulate IE7 only when we are to use excanvas -->
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<![endif]-->
+<!-- Favicons --> 
+<link rel="shortcut icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="icon" type="image/png" href="/static/images/favicons/favicon.png"/>
+<link rel="apple-touch-icon" href="/static/images/favicons/apple.png" />
+<!-- Main Stylesheet --> 
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+<!-- Colour Schemes
+Default colour scheme is blue. Uncomment prefered stylesheet to use it.
+<link rel="stylesheet" href="css/brown.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/gray.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/green.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/pink.css" type="text/css" media="screen" />  
+<link rel="stylesheet" href="css/red.css" type="text/css" media="screen" />
+-->
+<!-- Your Custom Stylesheet --> 
+<link rel="stylesheet" href="/static/css/custom.css" type="text/css" />
+<!--swfobject - needed only if you require <video> tag support for older browsers -->
+<script type="text/javascript" src="/static/js/swfobject.js"></script>
+<!-- jQuery with plugins -->
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<!-- Could be loaded remotely from Google CDN : <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" src="/static/js/jquery.ui.core.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.widget.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.tabs.min.js"></script>
+<!-- jQuery tooltips -->
+<script type="text/javascript" src="/static/js/jquery.tipTip.min.js"></script>
+<!-- Superfish navigation -->
+<script type="text/javascript" src="/static/js/jquery.superfish.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.supersubs.min.js"></script>
+<!-- jQuery form validation -->
+<script type="text/javascript" src="/static/js/jquery.validate_pack.js"></script>
+<!-- jQuery popup box -->
+<script type="text/javascript" src="/static/js/jquery.nyroModal.pack.js"></script>
+<!-- jQuery graph plugins -->
+<!--[if IE]><script type="text/javascript" src="/static/js/flot/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" src="/static/js/flot/jquery.flot.min.js"></script>
+<!-- Internet Explorer Fixes --> 
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" media="all" href="/static/css/ie.css"/>
+<script src="/static/js/html5.js"></script>
+<![endif]-->
+<!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
+<!--[if lt IE 8]>
+<script src="/static/js/IE8.js"></script>
+<![endif]-->
+<!--加载首页数据-->
+<script type="text/javascript" src="/static/js/dashboard.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	/* setup navigation, content boxes, etc... */
+	Administry.setup();
+	
+	/* progress bar animations - setting initial values */
+	Administry.progress("#cpu", ${LD['cpu_percent']}, 100);
+	Administry.progress("#mem", ${LD['mem_used_p']}, 100);
+	Administry.progress("#disk", ${LD['disk_used_p']}, 100);
+
+	/* flot graphs */
+	var sales = [{
+		label: 'eth0 In (MB)',
+		data: [[1, 410],[2,250],[3,400],[4,350],[5,410],[6,100],[7,800],[8,580],[9,800],[10,950],[11,800],[12,500]]
+	},{
+		label: 'eth0 Out (MB)',
+		data: [[1, 300],[2,180],[3,120],[4,150],[5,200],[6,5],[7,100],[8,300],[9,600],[10,480],[11,300],[12,200]]
+	}
+	];
+
+	var plot = $.plot($("#placeholder"), sales, {
+		bars: { show: true, lineWidth: 1 },
+		legend: { position: "nw" },
+		xaxis: { ticks: [[1, "00:00"], [2, ""], [3, "04:00"], [4, ""], [5, "08:00"], [6, ""], [7, "12:00"], [8, ""], [9, "16:00"], [10, ""], [11, "20:00"], [12, ""], [13, "24:00"]] },
+		yaxis: { min: 0, max: 1000 },
+		grid: { color: "#666" },
+		colors: ["#0a0", "#f00"]			
+    });
+});
+</script>
+</head>
+<body onload="getIndexData();">
+	<!-- Header -->
+	<%include file="header.html" args="curM='dashboard',ShowName=MyData['ShowName'],uid=MyData['SID']" />
+	<!-- End of Header -->
+	<!-- Page title -->
+	<div id="pagetitle">
+		<div class="wrapper">
+			<h1>控制中心</h1>
+			<!-- Quick search box -->
+			<form action="" method="get"><input class="" type="text" id="q" name="q" /></form>
+		</div>
+	</div>
+	<!-- End of Page title -->
+	
+	<!-- Page content -->
+	<div id="page">
+		<!-- Wrapper -->
+		<div class="wrapper">
+				<!-- Left column/section -->
+				<section class="column width6 first">
+				
+					<div class="colgroup leading">
+						<div class="column width3 first">
+							<h3>欢迎回来, <a href="/users/edit?id=${MyData['SID']}">${MyData['ShowName']}</a></h3>
+							<p>
+								SaltStack Admin <b>Beta</b>. Design By Luxiaok.<br />
+								<a href="/dashboard">建议</a> | <a href="/dashboard">Bug</a> | <a href="/dashboard">加入开发</a>
+							</p>
+						</div>
+						<div class="column width3">
+							<h4>上次登录</h4>
+							<p>
+								登录时间：${MyData['LastDate']}<br />
+								##登录地区：${MyData['LastIP']} - <%include file="ip.html" args="ip=MyData['LastIP']" /><br />
+								登录地区：${MyData['LastIP']} - ${MyData['LastLocation']}<br />
+								登录提示：${MyData['Lstat']}
+							</p>
+						</div>
+					</div>
+					
+					<div class="colgroup leading">
+						<div class="column width3 first">
+							<h4>基本信息</h4>
+							<hr/>
+							<table class="no-style full">
+								<tbody>
+								  <tr>
+										<td>主机名</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['hostname']}</a></td>
+									</tr>
+									<tr>
+										<td>IP地址</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['ip']}</a></td>
+									</tr>
+									<tr>
+										<td>操作系统</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['os']}</a></td>
+									</tr>
+									<tr>
+										<td>服务器型号</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['Manufacturer']} ${LD['Product_Name']}</a></td>
+									</tr>
+									<tr>
+										<td>SaltStack</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['salt_version']}</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="column width3">
+							<h4>运行状态</h4>
+							<hr/>
+							<table class="no-style full">
+								<tbody>
+									<tr>
+										<td>系统负载</td>
+										<td class="ta-right"><a href="javascript:void(0) ">1分钟：${LD['loadavg_1']} | 5分钟：${LD['loadavg_5']} | 15分钟：${LD['loadavg_15']}</a></td>
+									</tr>
+									<tr>
+										<td>进程数量</td>
+										<td class="ta-right"><a href="javascript:void(0) ">总进程数：${LD['process_num']} | 运行：1 | 睡眠：${LD['process_num']-1} | 僵尸：0</a></td>
+									</tr>
+									<tr>
+										<td>登录用户</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['login_user_num']}</a></td>
+									</tr>
+									<tr>
+										<td>网络流量</td>
+										<td class="ta-right"><a href="javascript:void(0) ">流出：${LD['net_out']} MB | 流入：${LD['net_in']} MB</a></td>
+									</tr>
+									<tr>
+										<td>运行时间</td>
+										<td class="ta-right"><a href="javascript:void(0) ">${LD['uptime']}</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				
+					<div class="colgroup leading">
+						<div class="column width3 first">
+							<h4>系统资源</h4>
+							<hr/>
+							<table class="no-style full">
+								<tbody>
+									<tr>
+										<td>CPU</td>
+										<td class="ta-right">${LD['cpu_physical_num']} x ${LD['cpu_logical_cores']} Cores</td>
+										<td><div id="cpu" class="progress full progress-green"><span><b></b></span></div></td>
+									</tr>
+									<tr>
+										<td>硬盘</td>
+										<td class="ta-right">${LD['disk_used']} / ${LD['disk_all']} GB</td>
+										<td><div id="disk" class="progress full progress-blue"><span><b></b></span></div></td>
+									</tr>
+									<tr>
+										<td>内存</td>
+										<td class="ta-right">${LD['mem_used']} / ${LD['mem_total']} MB</td>
+										<td><div id="mem" class="progress full progress-red"><span><b></b></span></div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="column width3">
+							<h4>网络带宽</h4>
+							<hr/>
+							<div id="placeholder" style="height:120px"></div>
+						</div>
+					</div>
+					<div class="clear">&nbsp;</div>
+				
+				</section>
+				<!-- End of Left column/section -->
+				
+				<!-- Right column/section -->
+				<aside class="column width2">
+					<div id="rightmenu">
+						<header>
+							<h3>SaltStack状态</h3>
+						</header>
+						<dl class="first">
+							<dt><img width="16" height="16" alt="" src="/static/images/information.png"></dt>
+							<dd><b>Minions状态</b></dd>
+							<dd class="last"><b>总数量： </b><span id="minions_all">Loading ...</span><br /><font color='green'><b>在　线： </b><span id="minions_online">Loading ...</span></font><br /><font color='red'><b>离　线： </b><span id="minions_down">Loading ...</span></font></dd>
+							
+							<dt><img width="16" height="16" alt="" src="/static/images/key.png"></dt>
+							<dd><b>Key认证状态</b></dd>
+							<dd class="last"><b>已认证： </b><span id="keys_ok">Loading ...</span><br /><font color='green'><b>未认证： </b><span id="keys_pre">Loading ...</span></font><br /><font color='red'><b>已拒绝： </b><span id="keys_rej">Loading ...</span></font></dd>
+
+						</dl>
+					</div>
+					<div class="content-box">
+						<header>
+							<h3>系统消息</h3>
+						</header>
+						<section>
+							<dl>
+								<dt>SaltStack</dt>
+								<dd>1.有1台主机通过Salt重启完毕<br />
+							    2.saltstack有更新: 2014.1.7<br /></dd>
+							  <br />
+								<dt>监控消息</dt>
+								<dd>1.有1台主机<font color='red'>宕机</font></dd>
+							</dl>
+						</section>
+					</div>
+				</aside>
+				<!-- End of Right column/section -->
+				
+		</div>
+		<!-- End of Wrapper -->
+	</div>
+	<!-- End of Page content -->
+<%include file="footer.html" />	
+</body>
+</html>
+
