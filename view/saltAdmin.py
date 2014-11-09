@@ -15,11 +15,8 @@ class Status:
     @Check_Login
     def POST(self):
 	p = web.input()
-        import view.zhongshan as zs
-        zs_host = zs.msl
         local = salt.client.LocalClient()
         msl = local.cmd('*',['grains.items','cmd.run'],[[],['cat /proc/uptime /proc/loadavg | xargs echo']])
-        msl =  dict(msl,**zs_host)
         x = 1
         rt = ""
         for i in msl:
