@@ -51,7 +51,8 @@ Ubuntu 系列<br>
 依赖以下python模块：
 * python-dmidecode
 * psutil
-* salt
+安装方法：使用系统自带的包进行安装即可
+
 
 ## 四、初始化信息 ##
 * 启动：python run.py
