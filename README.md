@@ -1,6 +1,6 @@
 SaltAdmin
 =========
-基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)的运维平台<br>
+基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)的开源运维平台<br>
 Desgin By [Xiaok](http://github.com/luxiaok)
 
 ## 一、环境说明 ##
@@ -48,9 +48,9 @@ Ubuntu 系列<br>
 
 
 ## 三、其他依赖 ##
-依赖以下python模块：
+依赖以下python模块
 * python-dmidecode
-* psutil
+* psutil<br>
 安装方法：使用系统自带的包进行安装即可
 
 
