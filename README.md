@@ -55,10 +55,11 @@ Ubuntu 系列<br>
 
 
 ## 四、初始化信息 ##
+* 会话：项目目录下新建session目录，用于保存会话
 * 启动：python run.py
 * 端口：8080
-* 用户名：admin
-* 密  码：admin
+* 用名：admin
+* 密码：admin
 
 ## 五、截图欣赏 ##
 
