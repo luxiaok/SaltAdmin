@@ -3,6 +3,8 @@ SaltAdmin
 基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)框架的开源运维平台<br>
 Desgin By [Xiaok](http://github.com/luxiaok)
 
+收到一些朋友的邮件，没来得及一一回复，抱歉。这个平台还是一个很初级的东西，还有很多需要改进和优化的地方，暂时仅供大家参考和交流。
+
 ## 一、环境说明 ##
 * 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
 * [Python](http://www.python.org)：2.6.6/2.7.8
@@ -50,7 +52,7 @@ Ubuntu 系列<br>
 ## 三、其他依赖 ##
 依赖以下python模块
 * python-dmidecode
-* psutil  ## 最好pip安装，yum安装的话版本太低
+* psutil  ## 系统自带的版本过低，使用pip或者easy_install安装最新版
 
 安装方法：使用系统自带的包进行安装即可
 
