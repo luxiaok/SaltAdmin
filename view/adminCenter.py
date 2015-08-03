@@ -51,7 +51,7 @@ class LocalInfo:
         return "%.1f" % psutil.cpu_percent(0.1)
 
     def cpu_nums(self):
-        cpu_physical_num = psutil._pslinux.cpu_count_physical()
+        cpu_physical_num = psutil.cpu_count(logical=False)
         cpu_logical_cores = psutil.cpu_count() # 返回CPU逻辑核数量
         return {'cpu_physical_num':cpu_physical_num, 'cpu_logical_cores':cpu_logical_cores}
 
