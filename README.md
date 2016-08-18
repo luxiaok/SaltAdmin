@@ -1,7 +1,7 @@
 SaltAdmin
 =========
-基于[Python](http://www.python.org)、[SaltStack](http://www.saltstack.com)和[Webpy](http://webpy.org)框架的开源运维平台<br>
-Desgin By [Xiaok](http://github.com/luxiaok)
+基于[Python](http://www.python.org)、[SaltStack](https://github.com/saltstack/salt)和[Webpy](http://webpy.org)框架的开源运维平台<br>
+Designed By [Xiaok](http://github.com/luxiaok)
 
 收到一些朋友的邮件，没来得及一一回复，抱歉。这个平台还是一个很初级的东西，还有很多需要改进和优化的地方，暂时仅供大家参考和交流。
 
@@ -64,7 +64,7 @@ Ubuntu 系列<br>
 * 用名：admin
 * 密码：admin
 
-## 五、截图欣赏 ##
+## 五、截图预览 ##
 
 ### 登录 ###
 ![Login](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/login.png)
@@ -77,4 +77,3 @@ Ubuntu 系列<br>
 
 ### 设备管理 ###
 ![Device](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/device.png)
-
