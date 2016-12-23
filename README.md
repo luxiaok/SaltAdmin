@@ -1,7 +1,10 @@
 SaltAdmin
 =========
-基于[Python](http://www.python.org)、[SaltStack](https://github.com/saltstack/salt)和[Webpy](http://webpy.org)框架的开源运维平台<br>
+
+基于[SaltStack](https://github.com/saltstack/salt)的自动化运维平台
+
 Designed By [Xiaok](http://github.com/luxiaok)
+
 
 ## 【运维技术圈】微信公众号 ##
 
@@ -15,8 +18,10 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 >加群时请注明来自 **Github**
 
+
 ## 一、环境说明 ##
 * 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
+* [SaltStack](https://github.com/saltstack/salt)
 * [Python](http://www.python.org)：2.6.6/2.7.8
 * [Webpy](http://webpy.org)：0.37
 * [Mako](http://www.makotemplates.org/)：0.9.1/1.0.0
@@ -26,6 +31,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 * [Nginx](http://nginx.org/download/nginx-1.6.0.tar.gz)：1.4.7
 
 说明：uWSGI和Nginx作为Web容器是可选的环境，可以不部署
+
 
 ## 二、安装 ##
 
@@ -73,6 +79,7 @@ Ubuntu 系列<br>
 * 端口：8080
 * 用名：admin
 * 密码：admin
+
 
 ## 五、截图预览 ##
 
