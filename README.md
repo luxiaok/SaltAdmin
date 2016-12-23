@@ -3,7 +3,17 @@ SaltAdmin
 基于[Python](http://www.python.org)、[SaltStack](https://github.com/saltstack/salt)和[Webpy](http://webpy.org)框架的开源运维平台<br>
 Designed By [Xiaok](http://github.com/luxiaok)
 
-2016年10月24号，1024，这是一个特殊的日子。SaltAdmin运维平台将开启迭代更新的步伐，各位童鞋们久等了。
+## 【运维技术圈】微信公众号 ##
+
+![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/ops_circle_qrcode.jpg)
+
+>也可以微信搜索 **运维技术圈**
+
+## 技术交流QQ群 ##
+
+**459457262**
+
+>加群时请注明来自 **Github**
 
 ## 一、环境说明 ##
 * 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
