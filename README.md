@@ -6,13 +6,13 @@ SaltAdmin
 Designed By [Xiaok](http://github.com/luxiaok)
 
 
-## 【运维技术圈】微信公众号 ##
+### 运维技术圈（微信扫一扫） ###
 
 ![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/ops_circle_qrcode.jpg)
 
 >也可以微信搜索 **运维技术圈**
 
-## 技术交流QQ群 ##
+### 技术交流QQ群 ###
 
 **459457262**
 
