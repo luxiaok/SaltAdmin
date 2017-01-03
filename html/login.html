@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="/static/css/login.css" type="text/css" />
 	<!-- Javascript libraries (jQuery and Selectivizr) used for the custom checkbox -->
         <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="/static/js/login.js"></script>
+        <!--<script type="text/javascript" src="/static/js/login.js"></script>-->
 	<!--[if (gte IE 6)&(lte IE 8)]>
 		<script type="text/javascript" src="/static/js/selectivizr.js"></script>
 		<noscript><link rel="stylesheet" href="/static/css/loginfallback.css" /></noscript>
@@ -28,15 +28,77 @@
 					<input id="username" type="text" name="username" value="" />
 				</div>
 				<div class="password-field">
-					<input type="password" name="password" value="" />
+					<input id="password" type="password" name="password" value="" />
 				</div>
 				<input type="checkbox" name="rememberMe" id="rememberMe" /><label for="rememberMe">记住我</label>
-				<div class="forgot-usr-pwd">忘记 <a href="javascript:void(0)" onClick="lossPass();">用户名</a> 或 <a href="javascript:void(0)" onClick="lossPass();">密码</a></div>
-				<input id="login_submit" name="submit" value="GO" type="button" onClick="submitForm('LoginForm')" />
+				<div class="forgot-usr-pwd">忘记 <a href="javascript:void(0)">用户名</a> 或 <a href="javascript:void(0)">密码</a></div>
+				<input id="login_submit" name="submit" value="GO" type="button"/>
 			</form>
 		</div>
 		<div id="footer">
 			Copyright &copy; 2014.XK-Studio All rights reserved.<a target="_blank" href="http://cto.luxiaok.com/">陆小K</a>
 		</div>
 </body>
+<script>
+$(function(){
+    //监听回车事件
+    $("html").keydown(function(e){
+        var Key = e.which;
+        if(Key == 13){
+            login();
+        }
+    });
+    var getCookie = function(name){
+        var strCookie=document.cookie;
+        var arrCookie=strCookie.split("; ");
+        for(var i=0;i<arrCookie.length;i++){
+            var arr=arrCookie[i].split("=");
+            if(arr[0]==name) return arr[1];
+        }
+        return null;
+    };
+    var login = function(){
+        var username = $("#username").val().trim();
+        var password = $("#password").val().trim();
+        var rememberMe = "no";
+        if ($("#rememberMe").is(':checked')){
+            rememberMe = "yes";
+        }
+        if (username==""){
+            alert('用户名不能为空！');
+            $("#username").val('');
+            $("#username").focus();
+            return false;
+        }
+        if (password==""){
+            alert('密码不能为空！');
+            $("#password").val('');
+            $("#password").focus();
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {username:username,password:password,kpl:rememberMe},
+            dataType: "json",
+            success: function (response) {
+                var code = response['code'];
+                if (code==0) {
+                    console.log('Login Success');
+                    location.href = "/dashboard";//登录成功跳转至控制中心
+                } else if (code<0) {
+                    var msg = response['msg'];
+                    alert(msg);
+                } else {
+                    alert('未知错误');
+                }
+            },
+            error: function () {
+                alert('网络错误');
+            }
+        });
+    };
+    $("#login_submit").click(login);
+});
+</script>
 </html>
