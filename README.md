@@ -1,7 +1,7 @@
 SaltAdmin
 =========
 
-![SaltAdmin](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/logo.png)
+![SaltAdmin](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/SaltAdminLogo.jpg)
 
 基于[SaltStack](https://github.com/saltstack/salt)的自动化运维平台
 
