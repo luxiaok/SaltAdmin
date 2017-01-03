@@ -21,14 +21,14 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 ## 一、环境说明 ##
 * 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
-* [SaltStack](https://github.com/saltstack/salt)
+* [SaltStack](https://github.com/saltstack/salt) 2014.1.7
 * [Python](http://www.python.org)：2.6.6/2.7.8
 * [Webpy](http://webpy.org)：0.37
 * [Mako](http://www.makotemplates.org/)：0.9.1/1.0.0
 * [MySQL](http://www.percona.com/)：Percona-Server 5.5.36
 * [MySQL-python](http://pypi.python.org/pypi/MySQL-python)：1.2.5
-* [uWSGI](http://projects.unbit.it/downloads/uwsgi-2.0.6.tar.gz)：2.0.6
-* [Nginx](http://nginx.org/download/nginx-1.6.0.tar.gz)：1.4.7
+* [uWSGI](http://projects.unbit.it/downloads/uwsgi-2.0.6.tar.gz)：2.0.6 (Not Limit)
+* [Nginx](http://nginx.org/download/nginx-1.6.0.tar.gz)：1.4.7 (Not Limit)
 
 说明：uWSGI和Nginx作为Web容器是可选的环境，可以不部署
 
