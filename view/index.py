@@ -154,12 +154,10 @@ class Login:
                 web.setcookie('Username', '88888888', -1)
                 web.setcookie('Token', '88888888', -1)
         if getLogin():
-            #SID = getLogin()['SID']
-            ShowName = getLogin()['ShowName']
-            #print "ShowName: " + ShowName       
-            return render.dashboard(ShowName=ShowName)
+            #用户已登录
+            return web.seeother("/dashboard")
         else:
-            #return web.seeother("/login")
+            #用户未登录
             return render.login()
     
     def POST(self,*args):
