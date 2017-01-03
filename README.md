@@ -23,7 +23,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 ## 一、环境说明 ##
 * 系统平台：RHEL 6.5 x64 | CentOS 6.5 | Ubuntu 12.04
-* [SaltStack](https://github.com/saltstack/salt) 2014.1.7
+* [SaltStack](https://github.com/saltstack/salt) >= 2014.7.0
 * [Python](http://www.python.org)：2.6.6/2.7.8
 * [Webpy](http://webpy.org)：0.37
 * [Mako](http://www.makotemplates.org/)：0.9.1/1.0.0
