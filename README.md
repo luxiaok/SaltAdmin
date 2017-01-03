@@ -49,7 +49,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 * yum install MySQL-python
 
 ### 4.SaltStack ###
-RedHat 6 系列<br>
+RedHat/CentOS 6 系列<br>
 * rpm -ivh http://mirrors.sohu.com/fedora-epel/6Server/x86_64/epel-release-6-8.noarch.rpm
 * yum install salt-master
 * yum install salt-minion
