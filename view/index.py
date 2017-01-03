@@ -91,7 +91,7 @@ def genSession(SID,Username,ShowName,LastIP,LastLocation,LastDate,Token,Lstat,kp
     # 写入上次登录日期和IP到session
     if LastDate:
         # 格式化日期，加上年月日在前台显示，如果为None，表示用户是第一次登录
-        session.LastDate = time.strftime('%Y年%m月%d日 %H:%M:%S',time.strptime(str(LastDate),'%Y-%m-%d %H:%M:%S'))
+        session.LastDate = time.strftime('%Y-%m-%d %H:%M:%S',time.strptime(str(LastDate),'%Y-%m-%d %H:%M:%S'))
     else:
         session.LastDate = '第一次登录'
     session.LastIP = LastIP
