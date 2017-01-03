@@ -77,7 +77,7 @@ $(function(){
         }
         $.ajax({
             type: "POST",
-            url: "/login",
+            url: "/login?_key="+Math.random(),
             data: {username:username,password:password,kpl:rememberMe},
             dataType: "json",
             success: function (response) {
