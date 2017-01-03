@@ -171,7 +171,8 @@ class Login:
             getSQL = db.query('''select u.id,u.username,u.password,u.nickname,u.status,L.ip,L.location,L.date from users as u left join login_logs as L on u.loginfo=L.id where username="%s" and password=md5("%s")''' % (getPost.username,getPost.password))
         except:
             # 服务器(数据库)错误
-            return "false"
+            web.header('Content-Type', 'application/json')
+            return json.dumps({'code':-1,'msg':'数据库错误'})
         if getSQL:
             # 获取登录数据
             getData = getSQL[0]
@@ -194,13 +195,16 @@ class Login:
                 #else:
                 #    web.setcookie('HTTP_REFERER', '88888888', -1000)
                 #    return web.seeother("/dashboard")
-                return "true"
+                web.header('Content-Type', 'application/json')
+                return json.dumps({'code':0,'msg':'Success'}) # 登录成功
             else:
                 # 用户被禁用
-                return "disable"
+                web.header('Content-Type', 'application/json')
+                return json.dumps({'code':-2,'msg':'用户已被禁用'})
         else:
             # 用户名或密码错误
-            return "error"
+            web.header('Content-Type', 'application/json')
+            return json.dumps({'code':-3,'msg':'用户名或密码错误'})
 
 class Logout:
     def GET(self):
