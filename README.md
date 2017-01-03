@@ -8,7 +8,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 ## 【运维技术圈】微信公众号 ##
 
-![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/ops_circle_qrcode.jpg)
+![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/ops_circle_qrcode.jpg)
 
 >也可以微信搜索 **运维技术圈**
 
