@@ -1,6 +1,8 @@
 SaltAdmin
 =========
 
+![SaltAdmin](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/logo.png)
+
 基于[SaltStack](https://github.com/saltstack/salt)的自动化运维平台
 
 Designed By [Xiaok](http://github.com/luxiaok)
