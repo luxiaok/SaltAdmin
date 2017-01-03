@@ -14,11 +14,9 @@ def genToken(L):
         Str += random.sample(CharLib,1)
     return ''.join(Str)
 
-# Key is md5 for string "xiaok"
-key = 'db884468559f4c432bf1c1775f3dc9da'
-
 # 加密UID
 def encryptUID(id):
+    key = 'db884468559f4c432bf1c1775f3dc9da'
     return key + str(id)
 
 # 解密SID
