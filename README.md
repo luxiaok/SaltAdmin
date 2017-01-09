@@ -99,7 +99,12 @@ dbChar = 'utf8'
 * 用户名/密码：admin/admin
 
 
-## 五、截图预览 ##
+## 五、基础排错思路 ##
+
+**万变不离其宗，在终端看程序日志可以解决N多问题，不要依赖前端的弹窗提示**
+
+
+## 六、截图预览 ##
 
 ### 登录 ###
 ![Login](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/login.png)
