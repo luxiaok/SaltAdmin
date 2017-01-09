@@ -22,7 +22,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 
 ## 一、环境说明 ##
-* SaltAdmin: Beta版
+* SaltAdmin：Beta版
 * 系统平台：RHEL/CentOS 6.x | Ubuntu 12.04+
 * [SaltStack](https://github.com/saltstack/salt) >= 2014.7.0
 * [Python](http://www.python.org)：2.6.6/2.7.8
@@ -34,8 +34,9 @@ Designed By [Xiaok](http://github.com/luxiaok)
 * [Nginx](http://nginx.org/download/nginx-1.6.0.tar.gz)：1.4.7 (Not Limit)
 
 **说明**
-* (1)RHEL/CentOS支持6.x系列，7.0以上暂未测试(实际生产环境7.x系列还没成为主流)
-* (2)uWSGI和Nginx作为Web容器是可选的环境，可以不部署
+* (1) RHEL/CentOS支持6.x系列，7.0以上暂未测试(实际生产环境7.x系列还没成为主流)
+* (2) uWSGI和Nginx作为Web容器是可选的环境，可以不部署
+* (3) 其他软件的版本号在实际运行环境中如果不同，为了兼容性保持主版本号相同即可
 
 
 ## 二、安装 ##
