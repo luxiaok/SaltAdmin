@@ -63,6 +63,9 @@ Ubuntu 系列<br>
 * apt-get install salt-ssh
 * apt-get install salt-minion
 
+>可以根据实际环境配置Salt-Master和Salt-Minion，这里不进行说明。SaltAdmin对SaltStack本身没有配置依赖。
+
+
 ### 5.数据库初始化  ###
 * 新建数据库saltadmin
 * 导入doc目录下的saltadmin.sql文件
