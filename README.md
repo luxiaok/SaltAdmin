@@ -95,9 +95,8 @@ dbChar = 'utf8'
 
 ## 四、启动SaltAdmin ##
 * 启动：python run.py
-* 端口：8080
-* 用名：admin
-* 密码：admin
+* 访问端口：8080
+* 用户名/密码：admin/admin
 
 
 ## 五、截图预览 ##
