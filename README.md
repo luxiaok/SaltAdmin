@@ -68,6 +68,19 @@ Ubuntu 系列<br>
 * 导入doc目录下的saltadmin.sql文件
 * 配置config/database.py
 
+```
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+dbType = 'mysql'
+dbHost = '127.0.0.1'
+dbPort = 3306
+dbName = 'saltadmin'
+dbUser = 'test'
+dbPass = 'test'
+dbChar = 'utf8'
+```
+
 
 ## 三、其他依赖 ##
 依赖以下python模块
