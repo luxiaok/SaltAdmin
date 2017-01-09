@@ -12,7 +12,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 ![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/ops_circle_qrcode.jpg)
 
->也可以微信搜索 **运维技术圈**
+>或者微信搜索 **运维技术圈**
 
 ### 技术交流QQ群 ###
 
@@ -66,8 +66,12 @@ Ubuntu 系列<br>
 
 >可以根据实际环境配置Salt-Master和Salt-Minion，这里不进行说明。SaltAdmin对SaltStack本身没有配置依赖。
 
+### 5.其他依赖 ###
+依赖以下python模块
+* python-dmidecode ## 使用系统自带的包进行安装即可(yum install或者apt-get install)
+* psutil  ## 系统自带的版本过低，使用pip或者easy_install安装最新版
 
-### 5.数据库初始化  ###
+### 6.数据库配置  ###
 * 新建数据库saltadmin
 * 导入doc目录下的saltadmin.sql文件
 * 配置config/database.py
@@ -85,27 +89,18 @@ dbPass = 'test'
 dbChar = 'utf8'
 ```
 
-
-## 三、其他依赖 ##
-依赖以下python模块
-* python-dmidecode
-* psutil  ## 系统自带的版本过低，使用pip或者easy_install安装最新版
-
-安装方法：使用系统自带的包进行安装即可
-
-
-## 四、启动SaltAdmin ##
+## 三、启动SaltAdmin ##
 * 启动：python run.py
 * 访问端口：8080
 * 用户名/密码：admin/admin
 
 
-## 五、基础排错思路 ##
+## 四、基础排错思路 ##
 
 **万变不离其宗，在终端看程序日志可以解决N多问题，不要依赖前端的弹窗提示**
 
 
-## 六、截图预览 ##
+## 五、截图预览 ##
 
 ### 登录 ###
 ![Login](https://github.com/luxiaok/SaltAdmin/raw/master/screenshot/login.png)
