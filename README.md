@@ -32,8 +32,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 * [uWSGI](http://projects.unbit.it/downloads/uwsgi-2.0.6.tar.gz)：2.0.6 (Not Limit)
 * [Nginx](http://nginx.org/download/nginx-1.6.0.tar.gz)：1.4.7 (Not Limit)
 
-说明：
-
+**说明**
 * (1).RHEL/CentOS支持6.x系列，7.0以上暂未测试(实际生产环境7.x系列还没成为主流)
 * (2).uWSGI和Nginx作为Web容器是可选的环境，可以不部署
 
