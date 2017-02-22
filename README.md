@@ -8,11 +8,11 @@ SaltAdmin
 Designed By [Xiaok](http://github.com/luxiaok)
 
 
-### 运维技术圈（微信扫一扫） ###
+### Python运维圈（微信扫一扫） ###
 
-![运维技术圈](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/ops_circle_qrcode.jpg)
+![Python运维圈](https://github.com/luxiaok/SaltAdmin/raw/master/static/images/ops_circle_qrcode.jpg)
 
->或者微信搜索 **运维技术圈**
+>或者微信搜索 **Python运维圈**
 
 ### 技术交流QQ群 ###
 
