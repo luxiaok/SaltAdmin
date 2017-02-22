@@ -95,6 +95,8 @@ dbChar = 'utf8'
 * 访问端口：8080
 * 用户名/密码：admin/admin
 
+>更换监听端口：python run.py IP:Port
+
 
 ## 四、基础排错思路 ##
 
