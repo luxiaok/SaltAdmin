@@ -22,7 +22,7 @@ Designed By [Xiaok](http://github.com/luxiaok)
 
 
 ## 一、环境说明 ##
-* SaltAdmin：Beta版
+* SaltAdmin：1.0-Beta
 * 系统平台：RHEL/CentOS 6.x | Ubuntu 12.04+
 * [SaltStack](https://github.com/saltstack/salt) >= 2014.7.0
 * [Python](http://www.python.org)：2.6.6/2.7.x
