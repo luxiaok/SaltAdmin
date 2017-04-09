@@ -25,8 +25,8 @@ Designed By [Xiaok](http://github.com/luxiaok)
 * SaltAdmin：Beta版
 * 系统平台：RHEL/CentOS 6.x | Ubuntu 12.04+
 * [SaltStack](https://github.com/saltstack/salt) >= 2014.7.0
-* [Python](http://www.python.org)：2.6.6/2.7.8
-* [Webpy](http://webpy.org)：0.37+
+* [Python](http://www.python.org)：2.6.6/2.7.x
+* [Webpy](http://webpy.org)：0.38
 * [Mako](http://www.makotemplates.org/)：0.9.1/1.0.0+
 * [MySQL](http://www.percona.com/)：Percona-Server 5.5.36
 * [MySQL-python](http://pypi.python.org/pypi/MySQL-python)：1.2.5+
@@ -42,12 +42,12 @@ Designed By [Xiaok](http://github.com/luxiaok)
 ## 二、安装 ##
 
 ### 1.Webpy ###
-* wget http://webpy.org/static/web.py-0.37.tar.gz
-* tar zxf web.py-0.37.tar.gz
+* wget http://webpy.org/static/web.py-0.38.tar.gz
+* tar zxf web.py-0.38.tar.gz
 * python setup.py install
 
 ### 2.Mako ###
-* easy_install -Z mako
+* pip install mako
 
 ### 3.MySQLdb ###
 * yum install MySQL-python
@@ -69,8 +69,8 @@ Ubuntu 系列<br>
 
 ### 5.其他依赖 ###
 依赖以下python模块
-* python-dmidecode ## 使用系统自带的包进行安装即可(yum install或者apt-get install)
-* psutil  ## 系统自带的版本过低，使用pip或者easy_install安装最新版
+* yum install python-dmidecode
+* pip install -U psutil
 
 ### 6.数据库配置  ###
 * 新建数据库saltadmin
