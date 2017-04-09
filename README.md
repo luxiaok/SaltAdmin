@@ -65,7 +65,7 @@ Ubuntu 系列<br>
 * apt-get install salt-ssh
 * apt-get install salt-minion
 
->可以根据实际环境配置Salt-Master和Salt-Minion，这里不进行说明。SaltAdmin对SaltStack本身没有配置依赖。
+>新版的SaltStack已经有了官方的Yum仓库，具体请参照http://repo.saltstack.com/
 
 ### 5.其他依赖 ###
 依赖以下python模块
