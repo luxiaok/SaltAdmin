@@ -136,13 +136,14 @@ class Login:
                 else:
                     ShowName = d.nickname
                 if d.loginfo != d.LID:
-                    g2 = db.query('''select L.ip,L.date from users as U left join login_logs as L on U.loginfo=L.id where U.id="%s"''' % uid)
+                    g2 = db.query('''select L.ip,L.date,L.location from users as U left join login_logs as L on U.loginfo=L.id where U.id="%s"''' % uid)
                     d = g2[0]
                     # 这里还可以返回一个异地浏览器登录的提示
                     Lstat = "other" #上次登录在别的浏览器或者异地、异机
                 LastIP = d.ip
                 LastDate = d.date
-                genSession(uid,Username,ShowName,LastIP,LastDate,token,Lstat,kpl='yes')
+                LastLocation = d.location
+                genSession(uid,Username,ShowName,LastIP,LastLocation,LastDate,token,Lstat,kpl='yes')
                 if HTTP_REFERER:
                     web.setcookie('HTTP_REFERER', '88888888', -1000)
                     return web.seeother(HTTP_REFERER)
